@@ -1,0 +1,23 @@
+{
+  "name": "site-aurore-woussen",
+  "version": "1.0.0",
+  "description": "Site web du Dr. Aurore Woussen - Chirurgie Plastique & Reconstructrice",
+  "scripts": {
+    "sass": "sass scss/main.scss css/main.css",
+    "sass:watch": "sass --watch scss/main.scss css/main.css",
+    "build": "sass scss/main.scss css/main.css --style compressed",
+    "serve": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000"
+  },
+  "keywords": [
+    "chirurgie",
+    "plastique",
+    "esthétique"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}
+

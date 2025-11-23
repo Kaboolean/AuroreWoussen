@@ -3,6 +3,289 @@
     <div class="container">
         <h1 class="page-title">Tarifs</h1>
         
+        <!-- Boutons de sélection des tarifs -->
+        <div class="tarifs-buttons">
+            <button class="tarifs-button active" data-tarif="medecine-esthetique">
+                Médecine esthétique
+            </button>
+            <button class="tarifs-button" data-tarif="chirurgie-mammaire">
+                Chirurgie mammaire
+            </button>
+            <button class="tarifs-button" data-tarif="chirurgie-silhouette">
+                Chirurgie silhouette
+            </button>
+            <button class="tarifs-button" data-tarif="chirurgie-visage">
+                Chirurgie visage
+            </button>
+        </div>
+        
+        <!-- Cards de tarifs -->
+        <div class="tarifs-cards-container">
+            <div class="tarifs-card-content" data-card="medecine-esthetique" style="display: block;">
+                <h2 class="tarifs-card__title">Médecine esthétique</h2>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation première</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation préopératoire</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation révision</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Injection de toxine botulique</span>
+                        <span class="tarifs-card__price">à partir de 360€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Injection d'acide hyaluronique</span>
+                        <span class="tarifs-card__price">à partir de 360€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Fils tenseurs</span>
+                        <span class="tarifs-card__price">à partir de 600€</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tarifs-card-content" data-card="chirurgie-mammaire" style="display: none;">
+                <h2 class="tarifs-card__title">Chirurgie mammaire</h2>
+                
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation première</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation préopératoire</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation révision</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Plastique et Reconstructrice</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Réduction mammaire</span>
+                        <span class="tarifs-card__price">à partir de 1500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Augmentation mammaire par prothèses mammaires</span>
+                        <span class="tarifs-card__price">à partir de 2000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Augmentation mammaire par lipofilling</span>
+                        <span class="tarifs-card__price">à partir de 1000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Malformation et asymétries</span>
+                        <span class="tarifs-card__price">à partir de 1000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Gynécomastie</span>
+                        <span class="tarifs-card__price">à partir de 2500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Mamelons invaginés</span>
+                        <span class="tarifs-card__price">à partir de 1000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Reconstruction mammaire par prothèses mammaires</span>
+                        <span class="tarifs-card__price">à partir de 750€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Reconstruction mammaire par lipofilling</span>
+                        <span class="tarifs-card__price">à partir de 650€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Reconstruction mammaire par muscle grand dorsal</span>
+                        <span class="tarifs-card__price">à partir de 1500€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Esthétique</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des seins</span>
+                        <span class="tarifs-card__price">à partir de 3200€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des seins avec implants</span>
+                        <span class="tarifs-card__price">à partir de 5200€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des seins avec lipofilling</span>
+                        <span class="tarifs-card__price">à partir de 5500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Augmentation mammaire par prothèses mammaires</span>
+                        <span class="tarifs-card__price">à partir de 4200€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Augmentation mammaire par lipofilling</span>
+                        <span class="tarifs-card__price">à partir de 4500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Gynécomastie</span>
+                        <span class="tarifs-card__price">à partir de 2500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Mamelons invaginés</span>
+                        <span class="tarifs-card__price">à partir de 1000€</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tarifs-card-content" data-card="chirurgie-silhouette" style="display: none;">
+                <h2 class="tarifs-card__title">Chirurgie de la silhouette</h2>
+                
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation première</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation préopératoire</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation révision</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Plastique et Reconstructrice</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Mommy makeover</span>
+                        <span class="tarifs-card__price">à partir de 3500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Abdominoplastie</span>
+                        <span class="tarifs-card__price">à partir de 2000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Bodylift</span>
+                        <span class="tarifs-card__price">à partir de 3000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des bras</span>
+                        <span class="tarifs-card__price">à partir de 1200€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des cuisses</span>
+                        <span class="tarifs-card__price">à partir de 2000€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Esthétique</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Mommy makeover</span>
+                        <span class="tarifs-card__price">à partir de 6500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Abdominoplastie</span>
+                        <span class="tarifs-card__price">à partir de 3500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Bodylift</span>
+                        <span class="tarifs-card__price">à partir de 6000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Liposuccion</span>
+                        <span class="tarifs-card__price">à partir de 2000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des bras</span>
+                        <span class="tarifs-card__price">à partir de 3000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting des cuisses</span>
+                        <span class="tarifs-card__price">à partir de 4000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Nymphoplastie</span>
+                        <span class="tarifs-card__price">à partir de 1500€</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tarifs-card-content" data-card="chirurgie-visage" style="display: none;">
+                <h2 class="tarifs-card__title">Chirurgie du visage</h2>
+                
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation première</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation préopératoire</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Consultation révision</span>
+                        <span class="tarifs-card__price">82€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Plastique</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Blépharoplastie supérieure</span>
+                        <span class="tarifs-card__price">à partir de 1000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Blépharoplastie 4 paupières</span>
+                        <span class="tarifs-card__price">à partir de 2000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Oreilles décollées</span>
+                        <span class="tarifs-card__price">à partir de 1500€</span>
+                    </li>
+                </ul>
+                
+                <h3 class="tarifs-card__section-title">Esthétique</h3>
+                <ul class="tarifs-card__list">
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lifting du visage</span>
+                        <span class="tarifs-card__price">à partir de 5500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Minilifting du visage</span>
+                        <span class="tarifs-card__price">à partir de 3500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Blépharoplastie supérieure</span>
+                        <span class="tarifs-card__price">à partir de 1500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Blépharoplastie inférieure</span>
+                        <span class="tarifs-card__price">à partir de 2100€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Blépharoplastie 4 paupières</span>
+                        <span class="tarifs-card__price">à partir de 3500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Oreilles décollées</span>
+                        <span class="tarifs-card__price">à partir de 3000€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Lipofilling du visage</span>
+                        <span class="tarifs-card__price">à partir de 2500€</span>
+                    </li>
+                    <li class="tarifs-card__item">
+                        <span class="tarifs-card__label">Liposuccion du cou</span>
+                        <span class="tarifs-card__price">à partir de 2500€</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
         <div class="content-section">
             <p>Les tarifs des interventions de chirurgie esthétique varient en fonction de plusieurs facteurs : la complexité de l'intervention, la technique utilisée, la durée de l'opération, et les frais d'hospitalisation.</p>
             

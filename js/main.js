@@ -94,5 +94,89 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Gestion des boutons de tarifs
+    function initTarifsButtons() {
+        const buttons = document.querySelectorAll('.tarifs-button');
+        const cards = document.querySelectorAll('.tarifs-card-content');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetTarif = this.getAttribute('data-tarif');
+                
+                // Retirer la classe active de tous les boutons
+                buttons.forEach(b => b.classList.remove('active'));
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                // Masquer toutes les cards
+                cards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // Afficher la card correspondante
+                const targetCard = document.querySelector(`[data-card="${targetTarif}"]`);
+                if (targetCard) {
+                    targetCard.style.display = 'block';
+                }
+            });
+        });
+    }
+    
+    // Gestion des onglets de tarifs (ancien système, conservé pour compatibilité)
+    function initTarifsTabs() {
+        const tabs = document.querySelectorAll('.tarifs-tabs__tab');
+        const contents = document.querySelectorAll('.tarifs-tabs__content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Retirer la classe active de tous les onglets
+                tabs.forEach(t => t.classList.remove('active'));
+                // Ajouter la classe active à l'onglet cliqué
+                this.classList.add('active');
+                
+                // Masquer tous les contenus
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Afficher le contenu correspondant
+                const targetContent = document.querySelector(`[data-content="${targetTab}"]`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    }
+    
+    // Initialiser les boutons et onglets si la page tarifs est chargée
+    initTarifsButtons();
+    initTarifsTabs();
+    
+    // Réinitialiser les boutons et onglets après un changement de page (pour le router)
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                const tarifsButtons = document.querySelector('.tarifs-buttons');
+                const tarifsTabs = document.querySelector('.tarifs-tabs');
+                if (tarifsButtons) {
+                    initTarifsButtons();
+                }
+                if (tarifsTabs) {
+                    initTarifsTabs();
+                }
+            }
+        });
+    });
+    
+    const pageContent = document.getElementById('page-content');
+    if (pageContent) {
+        observer.observe(pageContent, {
+            childList: true,
+            subtree: true
+        });
+    }
 });
 

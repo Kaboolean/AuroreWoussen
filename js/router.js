@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     router.register('oreilles-decollees', 'pages/oreilles-decollees.html');
     router.register('avant-apres', 'pages/avant-apres.html');
     router.register('tarifs', 'pages/tarifs.html');
+    router.register('parcours-chirurgie', 'pages/parcours-chirurgie.html');
     router.register('contact', 'pages/contact.html');
     router.register('mentions-legales', 'pages/mentions-legales.html');
 

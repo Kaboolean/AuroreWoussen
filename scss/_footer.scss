@@ -40,6 +40,10 @@
         &--links {
             display: flex;
             align-items: center;
+
+            @media (max-width: $breakpoint-md) {
+                display: none;
+            }
         }
     }
     
@@ -133,6 +137,10 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+
+        @media (max-width: $breakpoint-md) {
+            display: none;
+        }
     }
 
     &__map-link {

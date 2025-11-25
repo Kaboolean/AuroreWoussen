@@ -5,7 +5,9 @@
   "scripts": {
     "sass": "sass scss/main.scss css/main.css",
     "sass:watch": "sass --watch scss/main.scss css/main.css",
-    "build": "sass scss/main.scss css/main.css --style compressed",
+    "sass:build": "sass scss/main.scss css/main.css --style compressed",
+    "build:html": "node scripts/generate-static.js",
+    "build": "npm run sass:build && npm run build:html",
     "serve": "npx serve . -l 3000",
     "dev": "npx serve . -l 3000"
   },

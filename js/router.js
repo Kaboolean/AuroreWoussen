@@ -132,6 +132,9 @@ class Router {
                 // Scroll vers le haut
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
+                // Mettre à jour les meta tags SEO
+                this.updateMetaTags(page);
+
                 // Réinitialiser les scripts si nécessaire
                 this.initPageScripts();
             }
@@ -187,6 +190,59 @@ class Router {
             });
         });
     }
+
+    /**
+     * Met à jour les meta tags SEO pour la page courante
+     * @param {string} page - Le nom de la page
+     */
+    updateMetaTags(page) {
+        if (!window.SEO_CONFIG) return;
+
+        const config = window.SEO_CONFIG.pages[page] || window.SEO_CONFIG.pages['home'];
+        const baseUrl = window.SEO_CONFIG.baseUrl;
+        const defaultImage = window.SEO_CONFIG.defaultImage;
+        const siteName = window.SEO_CONFIG.siteName;
+
+        if (!config) return;
+
+        const url = page === 'home' ? baseUrl + '/' : baseUrl + '/' + page;
+
+        // Mettre à jour le title
+        document.title = config.title;
+
+        // Mettre à jour la meta description
+        this.setMetaContent('name', 'description', config.description);
+
+        // Mettre à jour le canonical
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', url);
+        }
+
+        // Mettre à jour les Open Graph tags
+        this.setMetaContent('property', 'og:title', config.title);
+        this.setMetaContent('property', 'og:description', config.description);
+        this.setMetaContent('property', 'og:url', url);
+        this.setMetaContent('property', 'og:image', config.image || defaultImage);
+
+        // Mettre à jour les Twitter Card tags
+        this.setMetaContent('name', 'twitter:title', config.title);
+        this.setMetaContent('name', 'twitter:description', config.description);
+        this.setMetaContent('name', 'twitter:image', config.image || defaultImage);
+    }
+
+    /**
+     * Met à jour le contenu d'une meta tag
+     * @param {string} attr - L'attribut à chercher (name ou property)
+     * @param {string} name - La valeur de l'attribut
+     * @param {string} content - Le nouveau contenu
+     */
+    setMetaContent(attr, name, content) {
+        const meta = document.querySelector(`meta[${attr}="${name}"]`);
+        if (meta && content) {
+            meta.setAttribute('content', content);
+        }
+    }
 }
 
 // Initialiser le router quand le DOM est prêt
@@ -214,8 +270,9 @@ document.addEventListener('DOMContentLoaded', () => {
     router.register('avant-apres', 'pages/avant-apres.html');
     router.register('tarifs', 'pages/tarifs.html');
     router.register('parcours-chirurgie', 'pages/parcours-chirurgie.html');
-    router.register('contact', 'pages/contact.html');
+    router.register('mon-cabinet', 'pages/mon-cabinet.html');
     router.register('mentions-legales', 'pages/mentions-legales.html');
+    router.register('articles', 'pages/articles.html');
 
     // Initialiser le router après l'enregistrement des routes
     router.init();

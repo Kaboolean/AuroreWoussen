@@ -9,6 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
             navToggle.classList.toggle('active');
         });
     }
+
+    // Fermer le menu mobile au clic sur un lien de navigation
+    function closeMobileMenu() {
+        if (navList && navList.classList.contains('active')) {
+            navList.classList.remove('active');
+            if (navToggle) {
+                navToggle.classList.remove('active');
+            }
+            // Fermer aussi les dropdowns
+            const dropdowns = document.querySelectorAll('.nav__dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.style.display = '';
+            });
+        }
+    }
+
+    // Ajouter l'écouteur sur tous les liens du header (sauf les parents de dropdown)
+    document.querySelectorAll('.nav__list a[data-page]').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Ajouter l'écouteur sur les liens des sous-menus
+    document.querySelectorAll('.nav__submenu a').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
     
     // Gestion des dropdowns uniquement pour mobile (pas pour desktop hover)
     let dropdownHandlersInitialized = false;
@@ -151,21 +176,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Gestion des articles
+    function initArticles() {
+        const articleItems = document.querySelectorAll('.articles-page__item');
+        const articleContents = document.querySelectorAll('.articles-page__article-content');
+
+        articleItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const targetArticle = this.getAttribute('data-article');
+
+                // Retirer la classe active de tous les items
+                articleItems.forEach(i => i.classList.remove('articles-page__item--active'));
+                // Ajouter la classe active à l'item cliqué
+                this.classList.add('articles-page__item--active');
+
+                // Masquer tous les contenus d'articles
+                articleContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Afficher l'article correspondant
+                const targetContent = document.querySelector(`.articles-page__article-content[data-article="${targetArticle}"]`);
+                if (targetContent) {
+                    targetContent.style.display = 'block';
+                }
+            });
+        });
+    }
+
     // Initialiser les boutons et onglets si la page tarifs est chargée
     initTarifsButtons();
     initTarifsTabs();
-    
+    initArticles();
+
     // Réinitialiser les boutons et onglets après un changement de page (pour le router)
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (mutation.addedNodes.length) {
                 const tarifsButtons = document.querySelector('.tarifs-buttons');
                 const tarifsTabs = document.querySelector('.tarifs-tabs');
+                const articlesPage = document.querySelector('.articles-page');
                 if (tarifsButtons) {
                     initTarifsButtons();
                 }
                 if (tarifsTabs) {
                     initTarifsTabs();
+                }
+                if (articlesPage) {
+                    initArticles();
                 }
             }
         });

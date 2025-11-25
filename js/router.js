@@ -6,6 +6,44 @@ class Router {
         this.routes = {};
         this.currentPage = null;
         this.contentContainer = document.getElementById('page-content');
+        // Détecter le base path pour GitHub Pages ou autres hébergements en sous-dossier
+        this.basePath = this.detectBasePath();
+    }
+
+    /**
+     * Détecte le chemin de base du site (pour GitHub Pages, etc.)
+     * @returns {string} Le chemin de base (ex: '/AuroreWoussen' ou '')
+     */
+    detectBasePath() {
+        // Chercher une balise <base> dans le HTML
+        const baseTag = document.querySelector('base');
+        if (baseTag) {
+            const href = baseTag.getAttribute('href');
+            if (href && href !== '/') {
+                // Normaliser : enlever le protocole et domaine si présent, garder juste le path
+                try {
+                    const url = new URL(href, window.location.origin);
+                    return url.pathname.replace(/\/$/, ''); // Enlever le slash final
+                } catch (e) {
+                    return href.replace(/\/$/, '');
+                }
+            }
+        }
+
+        // Sinon, détecter à partir de l'URL si on est dans un sous-dossier GitHub Pages
+        const path = window.location.pathname;
+        // Pattern typique GitHub Pages: /repo-name/...
+        const match = path.match(/^(\/[^\/]+)/);
+        if (match && match[1] !== '/pages') {
+            // Vérifier que ce n'est pas juste une page du site
+            const possibleBase = match[1];
+            // Si l'URL contient un sous-dossier qui ressemble à un nom de repo
+            if (window.location.hostname.includes('github.io')) {
+                return possibleBase;
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -23,14 +61,14 @@ class Router {
             if (link) {
                 const href = link.getAttribute('href');
                 const dataPage = link.getAttribute('data-page');
-                
+
                 // Si le lien a data-page, utiliser cette valeur
                 if (dataPage) {
                     e.preventDefault();
                     this.navigate(dataPage);
                     return;
                 }
-                
+
                 // Sinon, vérifier si c'est un lien interne vers une route enregistrée
                 if (href && href.startsWith('/') && !href.startsWith('//') && !href.startsWith('http')) {
                     const page = href.replace(/^\//, '').replace(/\.html$/, '') || 'home';
@@ -42,8 +80,25 @@ class Router {
             }
         });
 
+        // Gérer la redirection depuis 404.html (GitHub Pages SPA hack)
+        this.handleSPARedirect();
+
         // Charger la page initiale
         this.handleRoute();
+    }
+
+    /**
+     * Gère la redirection depuis 404.html pour GitHub Pages
+     */
+    handleSPARedirect() {
+        // Vérifier si on a été redirigé depuis 404.html
+        const redirectPath = sessionStorage.getItem('redirect_path');
+        if (redirectPath) {
+            sessionStorage.removeItem('redirect_path');
+            // Nettoyer l'URL (enlever le query string utilisé pour la redirection)
+            const cleanUrl = this.basePath + redirectPath;
+            window.history.replaceState(null, '', cleanUrl);
+        }
     }
 
     /**
@@ -61,7 +116,10 @@ class Router {
      */
     navigate(path) {
         // Mettre à jour l'URL sans recharger la page
-        window.history.pushState({ page: path }, '', path === 'home' ? '/' : `/${path}`);
+        const url = path === 'home'
+            ? (this.basePath || '/')
+            : `${this.basePath}/${path}`;
+        window.history.pushState({ page: path }, '', url);
         this.loadPage(path);
     }
 
@@ -69,10 +127,15 @@ class Router {
      * Gère le routing basé sur l'URL actuelle
      */
     handleRoute() {
-        const path = window.location.pathname;
+        let path = window.location.pathname;
         let page = 'home';
 
-        if (path !== '/' && path !== '/index.html') {
+        // Enlever le base path si présent
+        if (this.basePath && path.startsWith(this.basePath)) {
+            path = path.slice(this.basePath.length);
+        }
+
+        if (path !== '/' && path !== '/index.html' && path !== '') {
             // Extraire le nom de la page depuis l'URL
             // Ex: /protheses-mammaires -> protheses-mammaires
             page = path.replace(/^\//, '').replace(/\.html$/, '');
@@ -113,8 +176,9 @@ class Router {
                 throw new Error('Le site doit être servi via un serveur HTTP (pas file://). Utilisez un serveur local comme "python -m http.server" ou "npx serve".');
             }
 
-            // Charger le template
-            const response = await fetch(templatePath);
+            // Charger le template (ajouter le base path pour GitHub Pages)
+            const fullPath = this.basePath ? `${this.basePath}/${templatePath}` : templatePath;
+            const response = await fetch(fullPath);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP ${response.status}: ${response.statusText} - Fichier: ${templatePath}`);
             }

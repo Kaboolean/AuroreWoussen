@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection...</title>
+    <script>
+        // Redirection SPA pour GitHub Pages
+        // Cette page est affichée pour toutes les URLs qui ne correspondent pas à un fichier
+        // On redirige vers index.html avec l'URL originale encodée dans un paramètre
+        var pathSegmentsToKeep = 1; // Nombre de segments à conserver (1 pour /AuroreWoussen)
+
+        var l = window.location;
+        var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+        var targetPath = l.pathname.slice(basePath.length);
+
+        // Rediriger vers la racine avec le chemin dans le hash ou le state
+        // On utilise sessionStorage pour passer le chemin à la page principale
+        sessionStorage.setItem('redirect_path', targetPath || '/');
+        l.replace(basePath + '/?' + (targetPath || ''));
+    </script>
+</head>
+<body>
+    <p>Redirection en cours...</p>
+</body>
+</html>

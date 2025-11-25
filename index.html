@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Base path pour GitHub Pages - à ajuster selon l'hébergement -->
+    <script>
+        // Détection automatique du base path pour GitHub Pages
+        (function() {
+            var base = document.createElement('base');
+            if (window.location.hostname.includes('github.io')) {
+                // Sur GitHub Pages, utiliser le premier segment du path comme base
+                var pathParts = window.location.pathname.split('/');
+                if (pathParts.length > 1 && pathParts[1]) {
+                    base.href = '/' + pathParts[1] + '/';
+                    document.head.appendChild(base);
+                }
+            }
+        })();
+    </script>
     <meta name="description" content="Dr. Aurore Woussen, chirurgien plasticien qualifiée à Dunkerque. Chirurgie esthétique du sein, de la silhouette et du visage. Consultations à la Clinique Villette.">
     <meta name="robots" content="index, follow">
     <title>Dr. Aurore Woussen | Chirurgien Plasticien Dunkerque</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docteur-aurore-woussen.fr/">

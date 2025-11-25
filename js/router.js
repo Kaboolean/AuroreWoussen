@@ -8,6 +8,7 @@ class Router {
         this.contentContainer = document.getElementById('page-content');
         // Détecter le base path pour GitHub Pages ou autres hébergements en sous-dossier
         this.basePath = this.detectBasePath();
+        console.log('Router initialisé avec basePath:', this.basePath);
     }
 
     /**
@@ -15,35 +16,42 @@ class Router {
      * @returns {string} Le chemin de base (ex: '/AuroreWoussen' ou '')
      */
     detectBasePath() {
-        // Chercher une balise <base> dans le HTML
-        const baseTag = document.querySelector('base');
-        if (baseTag) {
-            const href = baseTag.getAttribute('href');
-            if (href && href !== '/') {
-                // Normaliser : enlever le protocole et domaine si présent, garder juste le path
-                try {
-                    const url = new URL(href, window.location.origin);
-                    return url.pathname.replace(/\/$/, ''); // Enlever le slash final
-                } catch (e) {
-                    return href.replace(/\/$/, '');
+        // Vérifier si on a déjà stocké le basePath (pour éviter de le perdre après navigation)
+        const storedBasePath = sessionStorage.getItem('router_basePath');
+        if (storedBasePath !== null) {
+            return storedBasePath;
+        }
+
+        let basePath = '';
+
+        // Pour GitHub Pages: détecter automatiquement le nom du repo
+        if (window.location.hostname.includes('github.io')) {
+            // L'URL est de la forme: username.github.io/repo-name/...
+            // On extrait /repo-name
+            const pathParts = window.location.pathname.split('/').filter(p => p);
+            if (pathParts.length > 0) {
+                // Le premier segment est le nom du repo
+                basePath = '/' + pathParts[0];
+            }
+        } else {
+            // Chercher une balise <base> dans le HTML
+            const baseTag = document.querySelector('base');
+            if (baseTag) {
+                const href = baseTag.getAttribute('href');
+                if (href && href !== '/') {
+                    try {
+                        const url = new URL(href, window.location.origin);
+                        basePath = url.pathname.replace(/\/$/, '');
+                    } catch (e) {
+                        basePath = href.replace(/\/$/, '');
+                    }
                 }
             }
         }
 
-        // Sinon, détecter à partir de l'URL si on est dans un sous-dossier GitHub Pages
-        const path = window.location.pathname;
-        // Pattern typique GitHub Pages: /repo-name/...
-        const match = path.match(/^(\/[^\/]+)/);
-        if (match && match[1] !== '/pages') {
-            // Vérifier que ce n'est pas juste une page du site
-            const possibleBase = match[1];
-            // Si l'URL contient un sous-dossier qui ressemble à un nom de repo
-            if (window.location.hostname.includes('github.io')) {
-                return possibleBase;
-            }
-        }
-
-        return '';
+        // Stocker le basePath pour les navigations futures
+        sessionStorage.setItem('router_basePath', basePath);
+        return basePath;
     }
 
     /**
@@ -116,9 +124,13 @@ class Router {
      */
     navigate(path) {
         // Mettre à jour l'URL sans recharger la page
-        const url = path === 'home'
-            ? (this.basePath || '/')
-            : `${this.basePath}/${path}`;
+        let url;
+        if (path === 'home') {
+            url = this.basePath ? this.basePath + '/' : '/';
+        } else {
+            url = this.basePath ? `${this.basePath}/${path}` : `/${path}`;
+        }
+        console.log('Navigation vers:', path, '| URL:', url);
         window.history.pushState({ page: path }, '', url);
         this.loadPage(path);
     }
@@ -130,17 +142,23 @@ class Router {
         let path = window.location.pathname;
         let page = 'home';
 
+        console.log('handleRoute - pathname:', path, '| basePath:', this.basePath);
+
         // Enlever le base path si présent
         if (this.basePath && path.startsWith(this.basePath)) {
             path = path.slice(this.basePath.length);
         }
 
-        if (path !== '/' && path !== '/index.html' && path !== '') {
+        // Normaliser le path
+        if (!path || path === '/' || path === '/index.html') {
+            page = 'home';
+        } else {
             // Extraire le nom de la page depuis l'URL
             // Ex: /protheses-mammaires -> protheses-mammaires
             page = path.replace(/^\//, '').replace(/\.html$/, '');
         }
 
+        console.log('handleRoute - page détectée:', page);
         this.loadPage(page);
     }
 
@@ -178,6 +196,7 @@ class Router {
 
             // Charger le template (ajouter le base path pour GitHub Pages)
             const fullPath = this.basePath ? `${this.basePath}/${templatePath}` : templatePath;
+            console.log('loadPage - Chargement de:', fullPath);
             const response = await fetch(fullPath);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP ${response.status}: ${response.statusText} - Fichier: ${templatePath}`);

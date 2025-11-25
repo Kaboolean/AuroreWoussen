@@ -1,0 +1,104 @@
+// Navigation latérale entre pages de même catégorie
+.page-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background-color: rgba($primary-color, 0.8);
+        color: $white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            background-color: $primary-color;
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+    }
+
+    &--prev {
+        // Positionner au milieu de la marge gauche
+        // Marge = (100vw - 1200px) / 2, donc milieu = (100vw - 1200px) / 4
+        left: calc((100vw - #{$container-max-width}) / 4 - 25px);
+    }
+
+    &--next {
+        // Positionner au milieu de la marge droite
+        right: calc((100vw - #{$container-max-width}) / 4 - 25px);
+    }
+
+    // Cacher sur mobile/tablette (pas assez de place dans les marges)
+    @media (max-width: $breakpoint-xl) {
+        display: none;
+    }
+}
+
+// Version mobile : barre de navigation en bas du contenu
+.page-nav-mobile {
+    display: none;
+
+    @media (max-width: $breakpoint-xl) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $spacing-md;
+        padding: $spacing-md;
+        background-color: $bg-light;
+        border-radius: 8px;
+        margin-top: $spacing-lg;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        background-color: $primary-color;
+        color: $white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+
+        &--hidden {
+            visibility: hidden;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+    }
+
+    &__info {
+        font-size: 0.85rem;
+        color: $text-light;
+        text-align: center;
+        flex: 1;
+    }
+}

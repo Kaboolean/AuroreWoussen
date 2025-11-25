@@ -218,6 +218,9 @@ class Router {
                 // Mettre à jour les meta tags SEO
                 this.updateMetaTags(page);
 
+                // Mettre à jour la navigation latérale entre pages de même catégorie
+                this.updatePageNavigation(page);
+
                 // Réinitialiser les scripts si nécessaire
                 this.initPageScripts();
             }
@@ -325,6 +328,176 @@ class Router {
         if (meta && content) {
             meta.setAttribute('content', content);
         }
+    }
+
+    /**
+     * Met à jour la navigation latérale entre pages de même catégorie
+     * @param {string} page - Le nom de la page actuelle
+     */
+    updatePageNavigation(page) {
+        // Définir les catégories de pages
+        const categories = {
+            sein: [
+                'protheses-mammaires',
+                'reduction-mammaire',
+                'lifting-mammaire',
+                'lipofilling-mammaire',
+                'mamelons-ombiliques',
+                'gynecomastie'
+            ],
+            silhouette: [
+                'lipoaspiration',
+                'abdominoplastie',
+                'body-lift',
+                'mommy-makeover',
+                'brachioplastie',
+                'cruroplastie'
+            ],
+            visage: [
+                'lifting-cervico-facial',
+                'blepharoplastie',
+                'oreilles-decollees'
+            ]
+        };
+
+        // Trouver la catégorie de la page actuelle
+        let currentCategory = null;
+        let currentIndex = -1;
+
+        for (const [category, pages] of Object.entries(categories)) {
+            const index = pages.indexOf(page);
+            if (index !== -1) {
+                currentCategory = category;
+                currentIndex = index;
+                break;
+            }
+        }
+
+        const prevNav = document.getElementById('page-nav-prev');
+        const nextNav = document.getElementById('page-nav-next');
+
+        // Si la page n'est pas dans une catégorie, cacher la navigation
+        if (!currentCategory) {
+            if (prevNav) prevNav.style.display = 'none';
+            if (nextNav) nextNav.style.display = 'none';
+            this.removeMobileNavigation();
+            return;
+        }
+
+        const pagesInCategory = categories[currentCategory];
+        const prevPage = currentIndex > 0 ? pagesInCategory[currentIndex - 1] : null;
+        const nextPage = currentIndex < pagesInCategory.length - 1 ? pagesInCategory[currentIndex + 1] : null;
+
+        // Configurer le bouton précédent (desktop)
+        if (prevNav) {
+            if (prevPage) {
+                prevNav.style.display = 'block';
+                prevNav.onclick = () => this.navigate(prevPage);
+                prevNav.querySelector('button').setAttribute('title', this.getPageTitle(prevPage));
+            } else {
+                prevNav.style.display = 'none';
+            }
+        }
+
+        // Configurer le bouton suivant (desktop)
+        if (nextNav) {
+            if (nextPage) {
+                nextNav.style.display = 'block';
+                nextNav.onclick = () => this.navigate(nextPage);
+                nextNav.querySelector('button').setAttribute('title', this.getPageTitle(nextPage));
+            } else {
+                nextNav.style.display = 'none';
+            }
+        }
+
+        // Ajouter la navigation mobile en bas du contenu
+        this.addMobileNavigation(prevPage, nextPage);
+    }
+
+    /**
+     * Ajoute la navigation mobile en bas du contenu de la page
+     * @param {string|null} prevPage - Page précédente
+     * @param {string|null} nextPage - Page suivante
+     */
+    addMobileNavigation(prevPage, nextPage) {
+        // Supprimer l'ancienne navigation mobile si elle existe
+        this.removeMobileNavigation();
+
+        // Créer la navigation mobile
+        const mobileNav = document.createElement('div');
+        mobileNav.className = 'page-nav-mobile';
+        mobileNav.id = 'page-nav-mobile';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'page-nav-mobile__btn' + (prevPage ? '' : ' page-nav-mobile__btn--hidden');
+        prevBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+            ${prevPage ? this.getPageTitle(prevPage) : ''}
+        `;
+        if (prevPage) {
+            prevBtn.onclick = () => this.navigate(prevPage);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'page-nav-mobile__btn' + (nextPage ? '' : ' page-nav-mobile__btn--hidden');
+        nextBtn.innerHTML = `
+            ${nextPage ? this.getPageTitle(nextPage) : ''}
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+            </svg>
+        `;
+        if (nextPage) {
+            nextBtn.onclick = () => this.navigate(nextPage);
+        }
+
+        mobileNav.appendChild(prevBtn);
+        mobileNav.appendChild(nextBtn);
+
+        // Ajouter au conteneur de la page
+        const container = this.contentContainer.querySelector('.container');
+        if (container) {
+            container.appendChild(mobileNav);
+        } else {
+            this.contentContainer.appendChild(mobileNav);
+        }
+    }
+
+    /**
+     * Supprime la navigation mobile
+     */
+    removeMobileNavigation() {
+        const existingNav = document.getElementById('page-nav-mobile');
+        if (existingNav) {
+            existingNav.remove();
+        }
+    }
+
+    /**
+     * Retourne le titre lisible d'une page
+     * @param {string} page - Le nom de la page
+     * @returns {string} Le titre de la page
+     */
+    getPageTitle(page) {
+        const titles = {
+            'protheses-mammaires': 'Prothèses mammaires',
+            'reduction-mammaire': 'Réduction mammaire',
+            'lifting-mammaire': 'Lifting mammaire',
+            'lipofilling-mammaire': 'Lipofilling mammaire',
+            'mamelons-ombiliques': 'Mamelons ombiliqués',
+            'gynecomastie': 'Gynécomastie',
+            'lipoaspiration': 'Lipoaspiration',
+            'abdominoplastie': 'Abdominoplastie',
+            'body-lift': 'Body lift',
+            'mommy-makeover': 'Mommy Makeover',
+            'brachioplastie': 'Brachioplastie',
+            'cruroplastie': 'Cruroplastie',
+            'lifting-cervico-facial': 'Lifting cervico-facial',
+            'blepharoplastie': 'Blépharoplastie',
+            'oreilles-decollees': 'Oreilles décollées'
+        };
+        return titles[page] || page;
     }
 }
 

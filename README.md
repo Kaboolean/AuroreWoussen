@@ -1,102 +1,62 @@
 # Site Web - Dr. Aurore Woussen
 
-Site web statique du Dr. Aurore Woussen, Chirurgien Plasticien à Dunkerque.
+Site web du Dr. Aurore Woussen, Chirurgien Plasticien à Dunkerque.
 
 ## Structure du projet
 
 ```
 .
-├── index.html          # Page principale
-├── css/               # Fichiers CSS compilés
-│   └── main.css
-├── scss/              # Fichiers SCSS sources
-│   ├── main.scss
-│   ├── _variables.scss
-│   ├── _base.scss
-│   ├── _header.scss
-│   ├── _footer.scss
-│   ├── _hero.scss
-│   ├── _presentation.scss
-│   └── _utilities.scss
-├── js/                # Fichiers JavaScript
-│   └── main.js
-├── images/            # Images du site
-│   └── presentation/
-└── package.json       # Configuration npm
+├── index.html          # Page principale (SPA)
+├── 404.html            # Page 404 (redirection SPA pour GitHub Pages)
+├── css/                # Fichiers CSS compilés
+├── scss/               # Fichiers SCSS sources
+├── js/                 # JavaScript (router, carousel, etc.)
+├── pages/              # Fragments HTML des pages
+├── images/             # Images du site
+└── package.json        # Configuration npm
 ```
 
 ## Développement local
 
 ### Prérequis
-- Node.js et npm installés
+- Node.js et npm
 
 ### Installation
 ```bash
 npm install
 ```
 
+### Lancer le serveur de développement
+Utiliser l'extension **Live Server** de VS Code :
+1. Ouvrir `index.html`
+2. Clic droit → "Open with Live Server"
+
 ### Compilation SCSS
 ```bash
 # Compilation unique
 npm run sass
 
-# Compilation en mode watch (surveillance des changements)
+# Mode watch
 npm run sass:watch
 
-# Compilation pour production (minifié)
+# Production (minifié)
+npm run sass:build
+```
+
+## Déploiement
+
+Le site est hébergé sur **GitHub Pages** avec le nom de domaine chez **OVH**.
+
+```bash
+# Build complet
 npm run build
 ```
 
-## Déploiement sur OVH
+Puis push sur la branche `main` pour déclencher le déploiement automatique.
 
-### Méthode 1 : FTP/SFTP
-1. Compiler le SCSS pour la production :
-   ```bash
-   npm run build
-   ```
+## Architecture
 
-2. Transférer les fichiers suivants sur votre serveur OVH :
-   - `index.html`
-   - `css/main.css`
-   - `js/main.js`
-   - `images/` (dossier complet)
-
-3. Structure recommandée sur le serveur :
-   ```
-   www/
-   ├── index.html
-   ├── css/
-   │   └── main.css
-   ├── js/
-   │   └── main.js
-   └── images/
-       └── presentation/
-           ├── AurorePresentation1.jpg
-           ├── AurorePresentation2.jpg
-           └── AurorePresentation3.jpg
-   ```
-
-### Méthode 2 : Git (si disponible)
-1. Créer un dépôt Git
-2. Configurer le déploiement automatique sur OVH
-3. Le serveur compilera automatiquement lors du push
-
-### Configuration serveur OVH
-
-Le site est prêt à être déployé. Assurez-vous que :
-- Le serveur supporte les fichiers statiques HTML/CSS/JS
-- Les chemins relatifs sont corrects
-- Les permissions des fichiers sont correctes (644 pour les fichiers, 755 pour les dossiers)
-
-### Fichiers à ne PAS déployer
-- `node_modules/`
-- `scss/` (sources, déjà compilées en CSS)
-- `package.json` (optionnel, seulement si vous voulez compiler sur le serveur)
-- `.git/` (si vous utilisez Git)
-
-## Notes
-
-- Les fichiers SCSS sont compilés en CSS avant le déploiement
-- Le site est responsive et optimisé pour mobile
-- Tous les chemins sont relatifs pour faciliter le déploiement
-
+Le site utilise une architecture **SPA** (Single Page Application) :
+- `index.html` contient le header, footer et la structure principale
+- Les pages sont des fragments HTML chargés dynamiquement via le router (`js/router.js`)
+- Le fichier `404.html` redirige vers `index.html` pour supporter les URLs propres sur GitHub Pages

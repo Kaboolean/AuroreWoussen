@@ -1,4 +1,6 @@
-// Styles pour les pages de contenu dynamique
+// ============================================
+// STYLES POUR LES PAGES DE CONTENU DYNAMIQUE
+// ============================================
 
 #page-content {
     min-height: 60vh;
@@ -16,11 +18,14 @@
 }
 
 .page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-primary, #2c3e50);
+    font-family: $font-family-heading;
+    font-size: 2.75rem;
+    font-weight: 600;
+    color: $primary-color;
     margin-bottom: 2rem;
     text-align: center;
+    letter-spacing: 0.02em;
+    animation: fadeInUp 0.8s ease;
     
     @media (max-width: 768px) {
         font-size: 2rem;
@@ -30,11 +35,13 @@
 .content-section {
     max-width: 900px;
     margin: 0 auto;
+    animation: fadeIn 0.8s ease 0.2s backwards;
     
     h2 {
-        font-size: 1.8rem;
+        font-family: $font-family-heading;
+        font-size: 1.9rem;
         font-weight: 600;
-        color: var(--color-primary, #2c3e50);
+        color: $primary-color;
         margin-top: 2.5rem;
         margin-bottom: 1rem;
         
@@ -44,17 +51,19 @@
     }
     
     h3 {
+        font-family: $font-family-heading;
         font-size: 1.5rem;
         font-weight: 600;
-        color: var(--color-primary, #2c3e50);
+        color: $primary-color;
         margin-top: 2rem;
         margin-bottom: 1rem;
     }
     
     p {
-        line-height: 1.8;
+        font-family: $font-family-primary;
+        line-height: 1.85;
         margin-bottom: 1.5rem;
-        color: var(--color-text, #333);
+        color: $text-color;
     }
     
     ul, ol {
@@ -63,15 +72,17 @@
         
         li {
             margin-bottom: 0.8rem;
-            line-height: 1.7;
+            line-height: 1.75;
+            color: $text-color;
         }
     }
     
     img {
         max-width: 100%;
         height: auto;
-        border-radius: 8px;
+        border-radius: 16px;
         margin: 2rem 0;
+        box-shadow: $shadow-soft;
     }
 }
 
@@ -79,8 +90,12 @@
     text-align: center;
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid $border-color;
 }
+
+// ============================================
+// BLOCS DE CONTACT
+// ============================================
 
 .contact-info {
     display: grid;
@@ -98,54 +113,57 @@
 }
 
 .contact-block {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: $shadow-soft;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: $transition-smooth;
     
     &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-6px);
+        box-shadow: $shadow-strong;
+        border-color: rgba($accent-gold, 0.3);
     }
     
     h2 {
+        font-family: $font-family-heading;
         font-size: 1.6rem;
         margin-bottom: 1.5rem;
-        color: var(--color-primary, #2c3e50);
+        color: $primary-color;
         font-weight: 600;
     }
     
     .address,
     .phone {
         margin-bottom: 1.5rem;
-        line-height: 1.4;
+        line-height: 1.5;
         
         strong {
             display: block;
-            margin-bottom: 0.1rem;
-            color: var(--color-primary, #2c3e50);
+            margin-bottom: 0.25rem;
+            color: $primary-color;
             font-weight: 600;
         }
     }
     
     p {
         line-height: 1.8;
-        color: var(--color-text, #333);
+        color: $text-color;
     }
     
     a {
-        color: var(--color-primary, #2c3e50);
+        color: $primary-color;
         text-decoration: none;
         font-weight: 500;
+        transition: $transition-fast;
         
         &:hover {
-            text-decoration: underline;
+            color: $accent-gold;
         }
     }
     
-    // S'assurer que les boutons gardent leur couleur blanche
     .btn.btn--primary {
         color: $white !important;
         
@@ -169,6 +187,7 @@
         background: transparent;
         box-shadow: none;
         border: none;
+        backdrop-filter: none;
 
         &:hover {
             transform: none;
@@ -188,56 +207,62 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                border-radius: 16px;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
-                transition: transform 0.3s ease;
+                border-radius: 20px;
+                box-shadow: $shadow-soft;
+                transition: $transition-smooth;
                 margin: 0;
 
                 &:hover {
                     transform: scale(1.02);
+                    box-shadow: $shadow-medium;
                 }
             }
         }
     }
 }
 
-// Système de boutons pour les tarifs
+// ============================================
+// SYSTÈME DE BOUTONS TARIFS
+// ============================================
+
 .tarifs-buttons {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-bottom: 3rem;
     flex-wrap: wrap;
     
     @media (max-width: 768px) {
-        gap: 1rem;
+        gap: 0.75rem;
     }
 }
 
 .tarifs-button {
-    // Utiliser les mêmes styles que .btn.btn--primary
     display: inline-block;
-    padding: 0.75rem 2rem;
-    background-color: $primary-color;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    background: $bg-light;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    font-family: $font-family-primary;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: $white;
+    color: $text-color;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: $transition-smooth;
     white-space: nowrap;
     
     &:hover {
-        background-color: #1a252f;
-        color: $white;
+        background: rgba($accent-gold, 0.15);
+        color: $primary-color;
+        border-color: rgba($accent-gold, 0.3);
     }
     
     &.active {
-        background-color: $primary-color;
+        background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
         color: $white;
-        font-weight: 600;
+        border-color: transparent;
+        box-shadow: 0 4px 15px rgba(47, 69, 80, 0.3);
     }
     
     @media (max-width: 768px) {
@@ -254,22 +279,23 @@
     max-width: 900px;
     width: 100%;
     margin: 0 auto 2rem;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: $shadow-soft;
+    border: 1px solid rgba(255, 255, 255, 0.8);
     animation: fadeIn 0.3s ease;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: $transition-smooth;
     
     &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: $shadow-medium;
     }
     
-    // Réutiliser les styles de tarifs-card pour la structure interne
     .tarifs-card__title {
-        font-size: 1.8rem;
+        font-family: $font-family-heading;
+        font-size: 1.9rem;
         font-weight: 600;
         color: $primary-color;
         margin-bottom: 2rem;
@@ -277,13 +303,14 @@
     }
     
     .tarifs-card__section-title {
+        font-family: $font-family-heading;
         font-size: 1.4rem;
         font-weight: 600;
         color: $primary-color;
         margin-top: 2.5rem;
         margin-bottom: 1.5rem;
         padding-top: 2rem;
-        border-top: 2px solid #e0e0e0;
+        border-top: 2px solid $border-color;
         
         &:first-of-type {
             margin-top: 1.5rem;
@@ -302,7 +329,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 1.25rem 0;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid rgba($border-color, 0.7);
         
         &:last-child {
             border-bottom: none;
@@ -310,15 +337,17 @@
     }
     
     .tarifs-card__label {
+        font-family: $font-family-primary;
         font-size: 1.1rem;
         color: $text-color;
         font-weight: 500;
     }
     
     .tarifs-card__price {
+        font-family: $font-family-primary;
         font-size: 1rem;
-        font-weight: 400;
-        color: $primary-color;
+        font-weight: 500;
+        color: $accent-gold;
     }
     
     @media (max-width: 768px) {
@@ -340,14 +369,14 @@
     }
 }
 
-// Système d'onglets pour les tarifs (ancien système, conservé pour compatibilité)
+// Ancien système d'onglets (conservé pour compatibilité)
 .tarifs-tabs {
     margin-bottom: 3rem;
     
     &__header {
         display: flex;
         gap: 0;
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 2px solid $border-color;
         margin-bottom: 2rem;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -364,23 +393,24 @@
         background: transparent;
         border: none;
         border-bottom: 3px solid transparent;
+        font-family: $font-family-primary;
         font-size: 1rem;
         font-weight: 500;
-        color: #666;
+        color: $text-light;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: $transition-fast;
         white-space: nowrap;
         text-align: center;
         
         &:hover {
-            color: var(--color-primary, #2c3e50);
-            background: rgba(44, 62, 80, 0.05);
+            color: $primary-color;
+            background: rgba($accent-gold, 0.05);
         }
         
         &.active {
-            color: var(--color-primary, #2c3e50);
-            background: #f5f5f5;
-            border-bottom-color: var(--color-primary, #2c3e50);
+            color: $primary-color;
+            background: $bg-light;
+            border-bottom-color: $accent-gold;
             font-weight: 600;
         }
         
@@ -416,16 +446,17 @@
     max-width: 100%;
     width: 100%;
     margin: 0 auto 2rem;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: $shadow-soft;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: $transition-smooth;
     
     &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: $shadow-medium;
     }
     
     &:last-child {
@@ -433,9 +464,10 @@
     }
     
     &__title {
-        font-size: 1.8rem;
+        font-family: $font-family-heading;
+        font-size: 1.9rem;
         font-weight: 600;
-        color: var(--color-primary, #2c3e50);
+        color: $primary-color;
         margin-bottom: 2rem;
         text-align: center;
     }
@@ -451,7 +483,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 1.25rem 0;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid rgba($border-color, 0.7);
         
         &:last-child {
             border-bottom: none;
@@ -459,15 +491,17 @@
     }
     
     &__label {
+        font-family: $font-family-primary;
         font-size: 1.1rem;
-        color: var(--color-text, #333);
+        color: $text-color;
         font-weight: 500;
     }
     
     &__price {
+        font-family: $font-family-heading;
         font-size: 1.3rem;
         font-weight: 700;
-        color: var(--color-primary, #2c3e50);
+        color: $accent-gold;
     }
     
     @media (max-width: 768px) {
@@ -489,7 +523,10 @@
     }
 }
 
-// Images du cabinet
+// ============================================
+// IMAGES DU CABINET
+// ============================================
+
 .cabinet-images {
     display: flex;
     justify-content: center;
@@ -515,9 +552,9 @@
             height: 100%;
             width: auto;
             object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: $shadow-soft;
+            transition: $transition-smooth;
 
             @media (max-width: $breakpoint-md) {
                 height: auto;
@@ -526,6 +563,7 @@
 
             &:hover {
                 transform: scale(1.02);
+                box-shadow: $shadow-medium;
             }
         }
     }
@@ -535,38 +573,37 @@
     margin-top: 3rem;
 
     h2 {
+        font-family: $font-family-heading;
         margin-bottom: 1.5rem;
     }
 
     a {
         display: inline-block;
-        transition: transform 0.3s ease;
+        transition: $transition-smooth;
 
         &:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
     }
 
     img {
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease;
+        border-radius: 16px;
+        box-shadow: $shadow-soft;
+        transition: $transition-fast;
     }
 
     a:hover img {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: $shadow-medium;
     }
 }
 
-// Layout image-texte pour les pages d'opérations
+// ============================================
+// LAYOUT OPÉRATIONS (IMAGE + TEXTE)
+// ============================================
+
 .operation-layout {
     margin: 2rem 0;
-    overflow: hidden; // Contient le float
-    
-    @media (min-width: 769px) {
-        // Sur les grands écrans, utiliser float pour que le texte qui dépasse
-        // soit aligné sous l'image à gauche
-    }
+    overflow: hidden;
     
     &__image {
         width: 400px;
@@ -585,22 +622,24 @@
         img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: $shadow-soft;
             display: block;
             margin: 0;
+            transition: $transition-smooth;
+            
+            &:hover {
+                box-shadow: $shadow-medium;
+            }
         }
     }
     
     &__content {
-        // Le contenu commence à droite de l'image
-        // Si le contenu dépasse la hauteur de l'image, il continue en dessous
-        // aligné à gauche grâce au float
-        
         h2 {
-            font-size: 1.8rem;
+            font-family: $font-family-heading;
+            font-size: 1.9rem;
             font-weight: 600;
-            color: var(--color-primary, #2c3e50);
+            color: $primary-color;
             margin-top: 0;
             margin-bottom: 1rem;
             
@@ -610,17 +649,19 @@
         }
         
         h3 {
+            font-family: $font-family-heading;
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--color-primary, #2c3e50);
+            color: $primary-color;
             margin-top: 1.5rem;
             margin-bottom: 1rem;
         }
         
         p {
-            line-height: 1.8;
+            font-family: $font-family-primary;
+            line-height: 1.85;
             margin-bottom: 1.5rem;
-            color: var(--color-text, #333);
+            color: $text-color;
         }
         
         ul, ol {
@@ -629,12 +670,11 @@
             
             li {
                 margin-bottom: 0.8rem;
-                line-height: 1.7;
+                line-height: 1.75;
             }
         }
     }
     
-    // Clearfix pour contenir le float
     &::after {
         content: "";
         display: table;
@@ -642,7 +682,10 @@
     }
 }
 
-// Page Articles
+// ============================================
+// PAGE ARTICLES
+// ============================================
+
 .articles-page {
     padding: 4rem 0;
 
@@ -654,7 +697,7 @@
     .section__subtitle {
         text-align: center;
         margin-bottom: 3rem;
-        color: #666;
+        color: $text-light;
     }
 
     &__content {
@@ -690,21 +733,22 @@
 
     &__item {
         padding: 1.25rem 1.5rem;
-        background: #f8f9fa;
-        border-radius: 12px;
+        background: $bg-light;
+        border-radius: 16px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: $transition-smooth;
         border-left: 4px solid transparent;
 
         &:hover {
-            background: #f0f0f0;
+            background: $white;
             transform: translateX(5px);
+            box-shadow: $shadow-soft;
         }
 
         &--active {
             background: $white;
-            border-left-color: $primary-color;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left-color: $accent-gold;
+            box-shadow: $shadow-soft;
 
             .articles-page__item-title {
                 color: $primary-color;
@@ -714,20 +758,22 @@
 
     &__item-date {
         display: block;
+        font-family: $font-family-primary;
         font-size: 0.75rem;
-        color: #888;
+        color: $text-light;
         margin-bottom: 0.5rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
     }
 
     &__item-title {
-        font-size: 1rem;
+        font-family: $font-family-heading;
+        font-size: 1.05rem;
         font-weight: 600;
         color: $text-color;
         margin: 0;
         line-height: 1.4;
-        transition: color 0.3s ease;
+        transition: $transition-fast;
     }
 
     &__article {
@@ -738,8 +784,8 @@
     &__article-content {
         background: $white;
         padding: 3rem;
-        border-radius: 16px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        box-shadow: $shadow-soft;
 
         @media (max-width: $breakpoint-md) {
             padding: 2rem 1.5rem;
@@ -748,17 +794,20 @@
 
     &__article-date {
         display: inline-block;
-        font-size: 0.85rem;
+        font-family: $font-family-primary;
+        font-size: 0.8rem;
         color: $white;
-        background: $primary-color;
+        background: linear-gradient(135deg, $accent-gold 0%, darken($accent-gold, 10%) 100%);
         padding: 0.4rem 1rem;
         border-radius: 20px;
         margin-bottom: 1.5rem;
+        letter-spacing: 0.5px;
     }
 
     &__article-title {
+        font-family: $font-family-heading;
         font-size: 2rem;
-        font-weight: 700;
+        font-weight: 600;
         color: $primary-color;
         margin-bottom: 2rem;
         line-height: 1.3;
@@ -770,6 +819,7 @@
 
     .articles-page__article-content {
         h3 {
+            font-family: $font-family-heading;
             font-size: 1.4rem;
             font-weight: 600;
             color: $primary-color;
@@ -778,7 +828,8 @@
         }
 
         p {
-            line-height: 1.8;
+            font-family: $font-family-primary;
+            line-height: 1.85;
             color: $text-color;
             margin-bottom: 1.25rem;
             font-size: 1.05rem;
@@ -786,14 +837,19 @@
     }
 }
 
-// Section Réseaux sociaux - Page d'accueil
+// ============================================
+// SECTION RÉSEAUX SOCIAUX - PAGE D'ACCUEIL
+// ============================================
+
 .social-section {
-    padding: 2.5rem 0;
+    padding: 3rem 0;
     text-align: center;
-    background-color: $white;
+    background: $white;
+    position: relative;
 
     &__title {
-        font-size: 1.5rem;
+        font-family: $font-family-heading;
+        font-size: 1.6rem;
         font-weight: 600;
         color: $primary-color;
         margin-bottom: 1.5rem;
@@ -803,10 +859,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
+        gap: 2.5rem;
 
         @media (max-width: $breakpoint-sm) {
-            gap: 1.5rem;
+            gap: 2rem;
         }
     }
 
@@ -814,37 +870,44 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
         color: $primary-color;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: $transition-smooth;
+        padding: 1rem;
+        border-radius: 16px;
 
         &:hover {
-            transform: scale(1.1);
-            opacity: 0.8;
+            transform: translateY(-5px);
+            color: $accent-gold;
+            background: rgba($accent-gold, 0.08);
         }
 
         svg {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
 
             @media (max-width: $breakpoint-sm) {
-                width: 32px;
-                height: 32px;
+                width: 36px;
+                height: 36px;
             }
         }
 
         span {
+            font-family: $font-family-primary;
             font-size: 0.9rem;
             font-weight: 500;
         }
     }
 }
 
-// Section Compétences - Page d'accueil
+// ============================================
+// SECTION COMPÉTENCES - PAGE D'ACCUEIL
+// ============================================
+
 .competences {
     padding: 4rem 0;
-    background-color: $bg-light;
+    background: $bg-light;
 
     .section__title {
         text-align: center;
@@ -867,18 +930,26 @@
 
     &__card {
         display: block;
-        background: $white;
-        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: $shadow-soft;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        transition: $transition-smooth;
+        animation: fadeInUp 0.6s ease backwards;
+
+        &:nth-child(1) { animation-delay: 0.1s; }
+        &:nth-child(2) { animation-delay: 0.2s; }
+        &:nth-child(3) { animation-delay: 0.3s; }
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: $shadow-strong;
+            border-color: rgba($accent-gold, 0.3);
 
             .competences__card-image img {
-                transform: scale(1.05);
+                transform: scale(1.08);
             }
         }
     }
@@ -892,18 +963,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
     }
 
     &__card-content {
-        padding: 1.5rem;
+        padding: 1.75rem;
 
         h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: $font-family-heading;
+            font-size: 1.5rem;
+            font-weight: 600;
             color: $primary-color;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             text-align: center;
         }
 
@@ -913,7 +985,7 @@
             margin: 0;
 
             li {
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                border-bottom: 1px solid rgba($border-color, 0.5);
 
                 &:last-child {
                     border-bottom: none;
@@ -921,17 +993,18 @@
 
                 a {
                     display: block;
-                    padding: 0.75rem 0.5rem;
+                    padding: 0.875rem 0.75rem;
                     color: $text-color;
+                    font-family: $font-family-primary;
                     font-size: 0.95rem;
                     text-align: center;
                     text-decoration: none;
-                    transition: all 0.3s ease;
-                    border-radius: 4px;
+                    transition: $transition-fast;
+                    border-radius: 8px;
 
                     &:hover {
-                        background-color: rgba(130, 158, 168, 0.15);
-                        color: #829EA8;
+                        background: rgba($accent-gold, 0.12);
+                        color: $primary-color;
                     }
                 }
             }
@@ -939,14 +1012,18 @@
     }
 }
 
-// Page Chirurgies (liste des interventions)
+// ============================================
+// PAGE CHIRURGIES (LISTE DES INTERVENTIONS)
+// ============================================
+
 .chirurgies-page {
     &__intro {
         max-width: 800px;
         margin: 0 auto 3rem;
         text-align: center;
+        font-family: $font-family-primary;
         font-size: 1.1rem;
-        line-height: 1.8;
+        line-height: 1.85;
         color: $text-light;
     }
 
@@ -958,7 +1035,8 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        font-size: 1.5rem;
+        font-family: $font-family-heading;
+        font-size: 1.6rem;
         font-weight: 600;
         color: $primary-color;
         margin-bottom: 1.5rem;
@@ -970,7 +1048,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #829EA8;
+        color: $accent-gold;
     }
 
     &__links {
@@ -985,39 +1063,41 @@
 
     &__link {
         display: block;
-        padding: 1.25rem 1.5rem;
+        padding: 1.5rem 1.75rem;
         background: $white;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        border: 1px solid $border-color;
+        border-radius: 16px;
+        box-shadow: $shadow-soft;
+        border: 1px solid rgba($border-color, 0.5);
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: $transition-smooth;
 
         &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            border-color: #829EA8;
+            transform: translateY(-4px);
+            box-shadow: $shadow-medium;
+            border-color: rgba($accent-gold, 0.3);
 
             .chirurgies-page__link-title {
-                color: #829EA8;
+                color: $accent-gold;
             }
         }
     }
 
     &__link-title {
         display: block;
-        font-size: 1.1rem;
+        font-family: $font-family-heading;
+        font-size: 1.15rem;
         font-weight: 600;
         color: $primary-color;
-        margin-bottom: 0.25rem;
-        transition: color 0.3s ease;
+        margin-bottom: 0.35rem;
+        transition: $transition-fast;
     }
 
     &__link-desc {
         display: block;
+        font-family: $font-family-primary;
         font-size: 0.9rem;
         color: $text-light;
-        line-height: 1.4;
+        line-height: 1.5;
     }
 
     &__cta {

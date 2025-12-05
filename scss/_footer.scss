@@ -1,8 +1,24 @@
+// ============================================
+// FOOTER ÉLÉGANT
+// ============================================
+
 .footer {
-    background-color: $primary-color;
+    background: linear-gradient(180deg, $primary-color 0%, darken($primary-color, 8%) 100%);
     color: $white;
-    padding: $spacing-md 0 $spacing-sm;
+    padding: $spacing-lg 0 $spacing-sm;
     margin-top: $spacing-xl;
+    position: relative;
+    
+    // Ligne décorative dorée en haut
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, $accent-gold, transparent);
+    }
     
     &__content {
         display: flex;
@@ -26,6 +42,7 @@
     
     &__section {
         h3, h4 {
+            font-family: $font-family-heading;
             margin-bottom: $spacing-sm;
         }
 
@@ -48,26 +65,30 @@
     }
     
     &__logo {
-        height: 60px;
+        height: 55px;
         width: auto;
         object-fit: contain;
-        margin-bottom: $spacing-sm;
+        margin-bottom: $spacing-xs;
+        // Logo garde ses couleurs originales
     }
     
     &__title {
+        font-family: $font-family-heading;
         font-size: 1.25rem;
-        font-weight: 700;
+        font-weight: 600;
         margin-bottom: 0.5rem;
     }
     
     &__subtitle {
-        font-size: 0.75rem;
-        opacity: 0.9;
-        letter-spacing: 1px;
+        font-family: $font-family-primary;
+        font-size: 0.7rem;
+        opacity: 0.8;
+        letter-spacing: 2px;
         text-transform: uppercase;
     }
     
     &__heading {
+        font-family: $font-family-heading;
         font-size: 1rem;
         font-weight: 600;
         margin-bottom: $spacing-sm;
@@ -76,16 +97,34 @@
     &__links {
         display: flex;
         flex-direction: column;
-        gap: 0.25rem;
+        gap: 0.35rem;
         
         li {
             a {
-                color: rgba(255, 255, 255, 0.8);
-                font-size: 0.875rem;
-                transition: color 0.3s ease;
+                font-family: $font-family-primary;
+                color: rgba(255, 255, 255, 0.75);
+                font-size: 0.9rem;
+                transition: $transition-fast;
+                position: relative;
+                display: inline-block;
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    width: 0;
+                    height: 1px;
+                    background: $accent-gold;
+                    transition: width 0.3s ease;
+                }
                 
                 &:hover {
                     color: $white;
+                    
+                    &::after {
+                        width: 100%;
+                    }
                 }
             }
         }
@@ -93,16 +132,18 @@
     
     &__contact {
         p {
+            font-family: $font-family-primary;
             margin-bottom: 0.5rem;
-            line-height: 1.6;
-            font-size: 0.875rem;
+            line-height: 1.7;
+            font-size: 0.9rem;
         }
     }
     
     &__clinic-name {
         display: block;
-        margin-bottom: 0.125rem;
-        text-decoration: underline;
+        margin-bottom: 0.25rem;
+        color: $accent-gold;
+        font-weight: 600;
     }
     
     &__address {
@@ -110,16 +151,27 @@
             display: block;
             margin-bottom: 0.5rem;
         }
+        
+        a {
+            color: rgba(255, 255, 255, 0.9);
+            transition: $transition-fast;
+            
+            &:hover {
+                color: $accent-gold;
+            }
+        }
     }
     
     &__phone {
         a {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            transition: color 0.3s ease;
+            font-family: $font-family-primary;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: $transition-fast;
             
             &:hover {
-                color: $white;
+                color: $accent-gold;
             }
         }
     }
@@ -146,17 +198,19 @@
     &__map-link {
         display: block;
         overflow: hidden;
-        border-radius: 4px;
-        transition: transform 0.3s ease;
+        border-radius: 12px;
+        transition: $transition-smooth;
         cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
         &:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
     }
 
     &__map-image {
-        width: 400px;
+        width: 380px;
         height: auto;
         object-fit: cover;
         display: block;
@@ -165,8 +219,8 @@
     &__centered {
         text-align: center;
         padding: $spacing-lg 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         margin: $spacing-md 0;
     }
     
@@ -178,18 +232,20 @@
     }
     
     &__centered-text {
+        font-family: $font-family-primary;
         color: $white;
         font-size: 1rem;
-        line-height: 1.8;
+        line-height: 1.85;
         margin: 0;
         
         strong {
             font-size: 1.125rem;
-            font-weight: 700;
+            font-weight: 600;
+            color: $accent-gold;
         }
         
         @media (max-width: $breakpoint-md) {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             
             strong {
                 font-size: 1rem;
@@ -198,39 +254,48 @@
     }
     
     &__centered-logo {
-        height: 60px;
+        height: 55px;
         width: auto;
         object-fit: contain;
         
         @media (max-width: $breakpoint-md) {
-            height: 50px;
+            height: 45px;
         }
     }
     
     &__bottom {
         text-align: center;
         padding-top: $spacing-sm;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-family: $font-family-primary;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
     }
 }
+
+// ============================================
+// LIENS SOCIAUX DU FOOTER
+// ============================================
 
 .social {
     &__link {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
-        background-color: rgba(255, 255, 255, 0.1);
+        width: 42px;
+        height: 42px;
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
         color: $white;
-        transition: all 0.3s ease;
+        transition: $transition-smooth;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         
         &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba($accent-gold, 0.2);
+            border-color: rgba($accent-gold, 0.4);
+            transform: translateY(-3px);
+            color: $accent-gold;
         }
         
         svg {
@@ -242,6 +307,11 @@
             width: 18px;
             height: 18px;
             filter: brightness(0) invert(1);
+            transition: $transition-fast;
+        }
+        
+        &:hover img {
+            filter: brightness(0) saturate(100%) invert(78%) sepia(30%) saturate(500%) hue-rotate(10deg) brightness(95%);
         }
     }
 }

@@ -1,3 +1,7 @@
+// ============================================
+// RESET & BASE
+// ============================================
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +17,9 @@ body {
     font-size: $font-size-base;
     line-height: $line-height-base;
     color: $text-color;
-    background-color: $white;
+    background-color: $bg-cream;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -32,48 +38,266 @@ img {
 a {
     text-decoration: none;
     color: inherit;
-    transition: color 0.3s ease;
+    transition: $transition-fast;
 }
 
 ul {
     list-style: none;
 }
 
+// ============================================
+// ANIMATIONS KEYFRAMES
+// ============================================
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// ============================================
+// CLASSES D'ANIMATION UTILITAIRES
+// ============================================
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-stagger {
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.3s; }
+    &:nth-child(4) { animation-delay: 0.4s; }
+    &:nth-child(5) { animation-delay: 0.5s; }
+    &:nth-child(6) { animation-delay: 0.6s; }
+}
+
+// ============================================
+// BOUTONS ÉLÉGANTS
+// ============================================
+
 .btn {
     display: inline-block;
-    padding: 0.75rem 2rem;
+    padding: 1rem 2.5rem;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 50px;
+    font-family: $font-family-primary;
+    font-size: 0.9rem;
     font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: $transition-smooth;
+    position: relative;
+    overflow: hidden;
+    
+    @media (max-width: $breakpoint-md) {
+        padding: 0.875rem 2rem;
+        font-size: 0.85rem;
+    }
     
     &--primary {
-        background-color: $primary-color;
+        background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
         color: $white;
+        box-shadow: 0 4px 15px rgba(47, 69, 80, 0.3);
         
         &:hover {
-            background-color: #1a252f;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(47, 69, 80, 0.4);
+            color: $white;
+        }
+        
+        &:active {
+            transform: translateY(-1px);
+        }
+    }
+    
+    &--gold {
+        background: linear-gradient(135deg, $accent-gold 0%, darken($accent-gold, 10%) 100%);
+        color: $primary-color;
+        box-shadow: 0 4px 15px rgba(201, 169, 98, 0.4);
+        
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 98, 0.5);
+            color: $primary-color;
+        }
+    }
+    
+    &--outline {
+        background: transparent;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        
+        &:hover {
+            background: $primary-color;
+            color: $white;
+            transform: translateY(-3px);
         }
     }
 }
 
+// ============================================
+// TITRES DE SECTION
+// ============================================
+
 .section__title {
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: $font-family-heading;
+    font-size: 2.5rem;
+    font-weight: 600;
     margin-bottom: $spacing-sm;
     color: $primary-color;
+    letter-spacing: 0.02em;
     
     @media (max-width: $breakpoint-md) {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }
 
 .section__subtitle {
+    font-family: $font-family-primary;
     font-size: 1.125rem;
     color: $text-light;
     margin-bottom: $spacing-md;
+    font-weight: 400;
+}
+
+// ============================================
+// LIENS AVEC SOULIGNEMENT ANIMÉ
+// ============================================
+
+.link-animated {
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, $accent-gold, darken($accent-gold, 10%));
+        transition: width 0.3s ease;
+    }
+    
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+// ============================================
+// SÉPARATEURS DÉCORATIFS
+// ============================================
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: $spacing-lg 0;
+    
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, $border-color, transparent);
+    }
+    
+    &__icon {
+        margin: 0 $spacing-md;
+        color: $accent-gold;
+    }
+}
+
+// ============================================
+// CARTES DE BASE
+// ============================================
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: $shadow-soft;
+    transition: $transition-smooth;
+    overflow: hidden;
+    
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: $shadow-strong;
+        border-color: rgba($accent-gold, 0.3);
+    }
+}
+
+// ============================================
+// SELECTION DE TEXTE
+// ============================================
+
+::selection {
+    background: rgba($accent-gold, 0.3);
+    color: $primary-color;
+}
+
+::-moz-selection {
+    background: rgba($accent-gold, 0.3);
+    color: $primary-color;
 }
 

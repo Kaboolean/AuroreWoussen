@@ -1,32 +1,75 @@
-// Colors
-$primary-color: #2c3e50;
-$secondary-color: #3498db;
-$accent-color: #e74c3c;
-$text-color: #333;
-$text-light: #666;
-$bg-light: #f8f9fa;
+// ============================================
+// PALETTE DE COULEURS RAFFINÉE
+// ============================================
+
+// Couleurs principales
+$primary-color: #2F4550;       // Bleu-gris profond (sophistiqué)
+$secondary-color: #829EA8;     // Bleu-vert doux (accent)
+$accent-gold: #C9A962;         // Or/champagne (touche luxe)
+$accent-color: $accent-gold;
+
+// Couleurs de texte
+$text-color: #3D4449;          // Gris anthracite doux
+$text-light: #6B7280;          // Gris moyen
+
+// Couleurs de fond
+$bg-cream: #FAF9F6;            // Blanc cassé chaud
+$bg-light: #F5F3EF;            // Beige très clair
 $white: #ffffff;
-$border-color: #e0e0e0;
 
-// Typography
-$font-family-primary: 'Arial', 'Helvetica', sans-serif;
+// Bordures
+$border-color: #E8E4DF;
+
+// ============================================
+// TYPOGRAPHIE ÉLÉGANTE
+// ============================================
+
+// Polices (importées via Google Fonts)
+$font-family-heading: 'Cormorant Garamond', 'Georgia', serif;
+$font-family-primary: 'Lato', 'Helvetica Neue', sans-serif;
+
+// Tailles
 $font-size-base: 16px;
-$line-height-base: 1.6;
+$line-height-base: 1.7;
 
-// Spacing
+// ============================================
+// ESPACEMENTS
+// ============================================
+
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 2rem;
 $spacing-lg: 3rem;
 $spacing-xl: 4rem;
 
-// Breakpoints
+// ============================================
+// BREAKPOINTS
+// ============================================
+
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 
-// Container
+// ============================================
+// CONTAINER
+// ============================================
+
 $container-max-width: 1200px;
 $container-padding: 1rem;
+
+// ============================================
+// TRANSITIONS & ANIMATIONS
+// ============================================
+
+$transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+$transition-fast: all 0.3s ease;
+
+// ============================================
+// OMBRES
+// ============================================
+
+$shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 10px rgba(0, 0, 0, 0.04);
+$shadow-medium: 0 15px 50px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05);
+$shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.08);
 

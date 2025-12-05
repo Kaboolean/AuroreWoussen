@@ -1,3 +1,7 @@
+// ============================================
+// PAGE PRÉSENTATION
+// ============================================
+
 .presentation {
     padding: $spacing-xl 0;
     
@@ -19,15 +23,17 @@
     
     &__text {
         h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-family: $font-family-heading;
+            font-size: 1.9rem;
+            font-weight: 600;
             color: $primary-color;
             margin-bottom: $spacing-md;
         }
         
         p {
+            font-family: $font-family-primary;
             margin-bottom: $spacing-md;
-            line-height: 1.8;
+            line-height: 1.85;
             color: $text-color;
         }
     }
@@ -49,18 +55,19 @@
     &__image {
         width: 100%;
         overflow: hidden;
-        border-radius: 8px;
+        border-radius: 16px;
         
         img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: $shadow-soft;
+            transition: $transition-smooth;
             display: block;
             
             &:hover {
                 transform: scale(1.02);
+                box-shadow: $shadow-medium;
             }
         }
         
@@ -81,13 +88,14 @@
             width: auto;
             height: 100%;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: $shadow-soft;
+            transition: $transition-smooth;
             display: block;
 
             &:hover {
                 transform: scale(1.02);
+                box-shadow: $shadow-medium;
             }
         }
 
@@ -109,13 +117,33 @@
     }
 }
 
+// ============================================
+// SECTION DIPLÔMES & EXPÉRIENCES
+// ============================================
+
 .credentials {
     &__title {
-        font-size: 1.5rem;
-        font-weight: 700;
+        font-family: $font-family-heading;
+        font-size: 1.6rem;
+        font-weight: 600;
         color: $primary-color;
         margin-bottom: $spacing-md;
         margin-top: $spacing-lg;
+        position: relative;
+        padding-left: 1rem;
+        
+        // Barre décorative à gauche
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 70%;
+            background: linear-gradient(180deg, $accent-gold, transparent);
+            border-radius: 3px;
+        }
         
         &:first-child {
             margin-top: 0;
@@ -125,34 +153,51 @@
     &__list {
         display: flex;
         flex-direction: column;
-        gap: $spacing-md;
+        gap: $spacing-sm;
     }
 }
+
+// ============================================
+// ITEMS DE DIPLÔMES/EXPÉRIENCES
+// ============================================
 
 .credential {
     &__item {
         display: grid;
-        grid-template-columns: 120px 1fr;
+        grid-template-columns: 100px 1fr;
         gap: $spacing-md;
-        padding: $spacing-md;
-        background-color: $bg-light;
-        border-radius: 8px;
+        padding: $spacing-md $spacing-md;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba($border-color, 0.5);
+        transition: $transition-smooth;
+        
+        &:hover {
+            background: $white;
+            box-shadow: $shadow-soft;
+            transform: translateX(5px);
+        }
         
         @media (max-width: $breakpoint-md) {
             grid-template-columns: 1fr;
+            gap: $spacing-xs;
         }
     }
     
     &__year {
-        font-weight: 700;
-        color: $secondary-color;
-        font-size: 1.125rem;
+        font-family: $font-family-heading;
+        font-weight: 600;
+        color: $accent-gold;
+        font-size: 1.1rem;
     }
     
     &__content {
         p {
+            font-family: $font-family-primary;
             margin-bottom: $spacing-sm;
-            line-height: 1.8;
+            line-height: 1.75;
+            color: $text-color;
             
             &:last-child {
                 margin-bottom: 0;
@@ -160,6 +205,7 @@
             
             strong {
                 color: $primary-color;
+                font-weight: 600;
             }
         }
     }

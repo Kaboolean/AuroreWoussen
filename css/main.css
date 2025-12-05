@@ -596,11 +596,22 @@ ul {
   font-size: 2.5rem;
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 @media (max-width: 768px) {
   .hero__title {
     font-size: 2rem;
+  }
+}
+.hero__subtitle {
+  font-size: 1.125rem;
+  color: #3498db;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+  .hero__subtitle {
+    font-size: 1rem;
   }
 }
 .hero__quote {
@@ -620,6 +631,30 @@ ul {
   color: #333;
   margin-bottom: 3rem;
   line-height: 1.8;
+}
+
+.intro-local {
+  background-color: #ffffff;
+  padding: 2rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.intro-local__text {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.intro-local__text strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .intro-local__text {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
 }
 
 .presentation {

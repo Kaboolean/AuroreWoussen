@@ -12,10 +12,21 @@
         font-size: 2.5rem;
         font-weight: 700;
         color: $primary-color;
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-xs;
         
         @media (max-width: $breakpoint-md) {
             font-size: 2rem;
+        }
+    }
+    
+    &__subtitle {
+        font-size: 1.125rem;
+        color: $secondary-color;
+        font-weight: 500;
+        margin-bottom: $spacing-md;
+        
+        @media (max-width: $breakpoint-md) {
+            font-size: 1rem;
         }
     }
     
@@ -36,6 +47,32 @@
         color: $text-color;
         margin-bottom: $spacing-lg;
         line-height: 1.8;
+    }
+}
+
+// Section introduction locale pour SEO
+.intro-local {
+    background-color: $white;
+    padding: $spacing-md 0;
+    border-bottom: 1px solid $border-color;
+    
+    &__text {
+        text-align: center;
+        font-size: 1rem;
+        color: $text-light;
+        line-height: 1.8;
+        max-width: 900px;
+        margin: 0 auto;
+        
+        strong {
+            color: $primary-color;
+            font-weight: 600;
+        }
+        
+        @media (max-width: $breakpoint-md) {
+            font-size: 0.95rem;
+            padding: 0 $spacing-sm;
+        }
     }
 }
 

@@ -100,6 +100,10 @@ const SEO_CONFIG = {
         'mentions-legales': {
             title: 'Mentions Légales | Dr. Aurore Woussen',
             description: 'Mentions légales du site docteur-aurore-woussen.fr. Informations sur l\'éditeur et l\'hébergeur du site.'
+        },
+        'chirurgies': {
+            title: 'Interventions Chirurgicales | Chirurgie Esthétique | Dr. Woussen Dunkerque',
+            description: 'Découvrez toutes les interventions de chirurgie esthétique proposées par le Dr. Aurore Woussen : chirurgie du sein, de la silhouette et du visage à Dunkerque.'
         }
     }
 };

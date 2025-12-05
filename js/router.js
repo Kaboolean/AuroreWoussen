@@ -529,6 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
     router.register('mon-cabinet', 'pages/mon-cabinet.html');
     router.register('mentions-legales', 'pages/mentions-legales.html');
     router.register('articles', 'pages/articles.html');
+    router.register('chirurgies', 'pages/chirurgies.html');
 
     // Initialiser le router après l'enregistrement des routes
     router.init();

@@ -939,3 +939,101 @@
     }
 }
 
+// Page Chirurgies (liste des interventions)
+.chirurgies-page {
+    &__intro {
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: $text-light;
+    }
+
+    &__section {
+        margin-bottom: 3rem;
+    }
+
+    &__category-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: $primary-color;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid $border-color;
+    }
+
+    &__category-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #829EA8;
+    }
+
+    &__links {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+
+        @media (max-width: $breakpoint-sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__link {
+        display: block;
+        padding: 1.25rem 1.5rem;
+        background: $white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: 1px solid $border-color;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border-color: #829EA8;
+
+            .chirurgies-page__link-title {
+                color: #829EA8;
+            }
+        }
+    }
+
+    &__link-title {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $primary-color;
+        margin-bottom: 0.25rem;
+        transition: color 0.3s ease;
+    }
+
+    &__link-desc {
+        display: block;
+        font-size: 0.9rem;
+        color: $text-light;
+        line-height: 1.4;
+    }
+
+    &__cta {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid $border-color;
+        flex-wrap: wrap;
+
+        @media (max-width: $breakpoint-sm) {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+    }
+}
+

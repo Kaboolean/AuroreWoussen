@@ -20,6 +20,10 @@
         align-items: center;
         padding: 0.5rem 0;
         border-bottom: 1px solid $border-color;
+        
+        @media (max-width: $breakpoint-lg) {
+            padding: 0.25rem 0;
+        }
     }
 
     &__social {
@@ -162,6 +166,10 @@
         position: relative;
         transition: color 0.3s ease;
         
+        @media (max-width: $breakpoint-lg) {
+            padding: 0.5rem $spacing-sm;
+        }
+        
         // Barre animée au hover - apparaît au centre et s'étend vers les côtés
         &::after {
             content: '';
@@ -295,6 +303,7 @@
             position: absolute;
             right: 0;
             top: 0;
+            padding: 0.5rem;
         }
         
         span {
@@ -321,5 +330,9 @@
 .dropdown-arrow {
     font-size: 0.75rem;
     margin-left: 0.5rem;
+    
+    @media (max-width: $breakpoint-lg) {
+        display: none;
+    }
 }
 

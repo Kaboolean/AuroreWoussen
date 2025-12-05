@@ -98,6 +98,11 @@ ul {
   padding: 0.5rem 0;
   border-bottom: 1px solid #e0e0e0;
 }
+@media (max-width: 992px) {
+  .header__top {
+    padding: 0.25rem 0;
+  }
+}
 .header__social {
   display: flex;
   align-items: center;
@@ -220,6 +225,11 @@ ul {
   position: relative;
   transition: color 0.3s ease;
 }
+@media (max-width: 992px) {
+  .nav__link {
+    padding: 0.5rem 1rem;
+  }
+}
 .nav__link::after {
   content: "";
   position: absolute;
@@ -335,6 +345,7 @@ ul {
     position: absolute;
     right: 0;
     top: 0;
+    padding: 0.5rem;
   }
 }
 .nav__toggle span {
@@ -356,6 +367,11 @@ ul {
 .dropdown-arrow {
   font-size: 0.75rem;
   margin-left: 0.5rem;
+}
+@media (max-width: 992px) {
+  .dropdown-arrow {
+    display: none;
+  }
 }
 
 .footer {
@@ -1571,6 +1587,93 @@ ul {
 .competences__card-content ul li a:hover {
   background-color: rgba(130, 158, 168, 0.15);
   color: #829EA8;
+}
+
+.chirurgies-page__intro {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #666;
+}
+.chirurgies-page__section {
+  margin-bottom: 3rem;
+}
+.chirurgies-page__category-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+.chirurgies-page__category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #829EA8;
+}
+.chirurgies-page__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 576px) {
+  .chirurgies-page__links {
+    grid-template-columns: 1fr;
+  }
+}
+.chirurgies-page__link {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0e0e0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.chirurgies-page__link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: #829EA8;
+}
+.chirurgies-page__link:hover .chirurgies-page__link-title {
+  color: #829EA8;
+}
+.chirurgies-page__link-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+.chirurgies-page__link-desc {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+.chirurgies-page__cta {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+@media (max-width: 576px) {
+  .chirurgies-page__cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .carousel-section {

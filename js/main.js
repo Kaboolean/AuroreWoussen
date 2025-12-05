@@ -35,6 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', closeMobileMenu);
     });
     
+    // Fermer le menu mobile en cliquant en dehors du header
+    document.addEventListener('click', function(event) {
+        const header = document.querySelector('.header');
+        const isMobile = window.innerWidth <= 992;
+        
+        if (isMobile && navList && navList.classList.contains('active')) {
+            // Si le clic est en dehors du header, fermer le menu
+            if (!header.contains(event.target)) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
     // Gestion des dropdowns uniquement pour mobile (pas pour desktop hover)
     let dropdownHandlersInitialized = false;
     
@@ -49,29 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 const dropdown = item.querySelector('.nav__dropdown');
                 
                 if (link && dropdown) {
+                    // En mobile, rediriger vers la page chirurgies au lieu d'ouvrir le dropdown
                     link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        // Fermer les autres dropdowns
-                        dropdownItems.forEach(otherItem => {
-                            if (otherItem !== item) {
-                                const otherDropdown = otherItem.querySelector('.nav__dropdown');
-                                if (otherDropdown) {
-                                    otherDropdown.style.display = 'none';
-                                }
+                        if (window.innerWidth <= 992) {
+                            e.preventDefault();
+                            // Fermer le menu mobile
+                            closeMobileMenu();
+                            // Naviguer vers la page chirurgies
+                            if (window.router) {
+                                window.router.navigate('chirurgies');
+                            } else {
+                                window.location.href = '/chirurgies';
                             }
-                        });
-                        // Toggle le dropdown actuel
-                        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-                    });
-                }
-            });
-            
-            // Fermer les dropdowns en cliquant en dehors (mobile uniquement)
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.nav__item--dropdown')) {
-                    const dropdowns = document.querySelectorAll('.nav__dropdown');
-                    dropdowns.forEach(dropdown => {
-                        dropdown.style.display = 'none';
+                        }
                     });
                 }
             });

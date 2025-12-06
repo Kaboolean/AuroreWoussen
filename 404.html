@@ -5,19 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirection...</title>
     <script>
-        // Redirection SPA pour GitHub Pages
+        // Redirection SPA pour domaine personnalisé
         // Cette page est affichée pour toutes les URLs qui ne correspondent pas à un fichier
-        // On redirige vers index.html avec l'URL originale encodée dans un paramètre
-        var pathSegmentsToKeep = 1; // Nombre de segments à conserver (1 pour /AuroreWoussen)
-
+        // On redirige vers index.html avec l'URL originale encodée dans sessionStorage
+        
         var l = window.location;
-        var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
-        var targetPath = l.pathname.slice(basePath.length);
+        
+        // Déterminer le nombre de segments à conserver :
+        // - 0 pour un domaine personnalisé (docteur-aurore-woussen.fr)
+        // - 1 pour GitHub Pages (username.github.io/repo)
+        var pathSegmentsToKeep = l.hostname.includes('github.io') ? 1 : 0;
 
-        // Rediriger vers la racine avec le chemin dans le hash ou le state
-        // On utilise sessionStorage pour passer le chemin à la page principale
-        sessionStorage.setItem('redirect_path', targetPath || '/');
-        l.replace(basePath + '/?' + (targetPath || ''));
+        var basePath = pathSegmentsToKeep > 0 
+            ? l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') 
+            : '';
+        var targetPath = l.pathname.slice(basePath.length) || '/';
+
+        // Éviter les boucles de redirection : si on a déjà un query string, 
+        // c'est probablement une boucle, rediriger vers l'accueil
+        if (l.search) {
+            // On est en boucle, rediriger directement vers la page d'accueil
+            l.replace(basePath + '/');
+        } else {
+            // Stocker le chemin pour que le router puisse le récupérer
+            sessionStorage.setItem('redirect_path', targetPath);
+            // Rediriger vers la racine
+            l.replace(basePath + '/');
+        }
     </script>
 </head>
 <body>

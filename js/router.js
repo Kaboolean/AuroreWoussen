@@ -167,8 +167,14 @@ class Router {
      * @param {string} page - Le nom de la page à charger
      */
     async loadPage(page) {
-        // Si la page n'existe pas, charger la page d'accueil
+        // Si la page n'existe pas, rediriger vers la page d'accueil
         if (!this.routes[page]) {
+            // Si l'URL n'est pas déjà la racine, rediriger proprement vers l'accueil
+            const homeUrl = this.basePath ? this.basePath + '/' : '/';
+            if (window.location.pathname !== homeUrl && window.location.pathname !== this.basePath + '/index.html') {
+                console.log('Route inconnue:', page, '- Redirection vers accueil');
+                window.history.replaceState(null, '', homeUrl);
+            }
             page = 'home';
         }
 

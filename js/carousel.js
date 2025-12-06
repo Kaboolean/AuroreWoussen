@@ -1,6 +1,7 @@
 /**
  * Gestion des carrousels avant/après
  * Défilement automatique toutes les 3 secondes
+ * Le défilement s'arrête si l'utilisateur interagit avec les boutons
  */
 class Carousel {
     constructor(container) {
@@ -15,6 +16,14 @@ class Carousel {
         this.totalSlides = this.slides.length;
         this.autoPlayInterval = null;
         this.autoPlayDelay = 3000; // 3 secondes
+        this.userHasInteracted = false; // Flag pour savoir si l'utilisateur a interagi
+        
+        // Variables pour le swipe tactile
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
+        this.minSwipeDistance = 50; // Distance minimum pour déclencher un swipe (en pixels)
         
         this.init();
     }
@@ -25,23 +34,26 @@ class Carousel {
         // Créer les indicateurs
         this.createIndicators();
         
-        // Écouter les clics sur les boutons
+        // Écouter les clics sur les boutons (arrête le défilement automatique)
         if (this.prevBtn) {
-            this.prevBtn.addEventListener('click', () => this.prev());
+            this.prevBtn.addEventListener('click', () => this.prev(true));
         }
         if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', () => this.next());
+            this.nextBtn.addEventListener('click', () => this.next(true));
         }
         
         // Plus besoin d'écouter les clics sur les indicateurs (on utilise juste le compteur)
         
-        // Pause au survol
+        // Pause au survol (ne reprend pas si l'utilisateur a déjà interagi)
         this.container.addEventListener('mouseenter', () => this.pause());
-        this.container.addEventListener('mouseleave', () => this.play());
+        this.container.addEventListener('mouseleave', () => this.resumeIfNotInteracted());
         
         // Pause au focus (accessibilité)
         this.container.addEventListener('focusin', () => this.pause());
-        this.container.addEventListener('focusout', () => this.play());
+        this.container.addEventListener('focusout', () => this.resumeIfNotInteracted());
+        
+        // Support du swipe tactile pour mobile
+        this.initTouchEvents();
         
         // Gérer les erreurs de chargement d'images
         this.handleImageErrors();
@@ -105,22 +117,66 @@ class Carousel {
         }
     }
     
+    initTouchEvents() {
+        // Début du toucher
+        this.container.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.changedTouches[0].screenX;
+            this.touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        // Fin du toucher
+        this.container.addEventListener('touchend', (e) => {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.touchEndY = e.changedTouches[0].screenY;
+            this.handleSwipe();
+        }, { passive: true });
+    }
+    
+    handleSwipe() {
+        const diffX = this.touchStartX - this.touchEndX;
+        const diffY = this.touchStartY - this.touchEndY;
+        
+        // S'assurer que c'est bien un swipe horizontal (pas vertical)
+        // Le swipe horizontal doit être plus grand que le swipe vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > this.minSwipeDistance) {
+            if (diffX > 0) {
+                // Swipe vers la gauche → image suivante
+                this.next(true);
+            } else {
+                // Swipe vers la droite → image précédente
+                this.prev(true);
+            }
+        }
+    }
+    
     updateCarousel() {
         // Utiliser les pourcentages pour un déplacement plus fiable
         const translateX = -this.currentIndex * 100;
         this.track.style.transform = `translateX(${translateX}%)`;
     }
     
-    next() {
+    next(manual = false) {
         this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
         this.updateCarousel();
-        this.resetAutoPlay();
+        if (manual) {
+            // L'utilisateur a cliqué : arrêter définitivement le défilement automatique
+            this.userHasInteracted = true;
+            this.pause();
+        } else {
+            this.resetAutoPlay();
+        }
     }
     
-    prev() {
+    prev(manual = false) {
         this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
         this.updateCarousel();
-        this.resetAutoPlay();
+        if (manual) {
+            // L'utilisateur a cliqué : arrêter définitivement le défilement automatique
+            this.userHasInteracted = true;
+            this.pause();
+        } else {
+            this.resetAutoPlay();
+        }
     }
     
     goToSlide(index) {
@@ -132,6 +188,7 @@ class Carousel {
     }
     
     play() {
+        if (this.userHasInteracted) return; // Ne pas relancer si l'utilisateur a interagi
         this.pause(); // S'assurer qu'il n'y a pas d'intervalle en double
         this.autoPlayInterval = setInterval(() => {
             this.next();
@@ -142,6 +199,13 @@ class Carousel {
         if (this.autoPlayInterval) {
             clearInterval(this.autoPlayInterval);
             this.autoPlayInterval = null;
+        }
+    }
+    
+    resumeIfNotInteracted() {
+        // Reprendre le défilement automatique seulement si l'utilisateur n'a pas interagi
+        if (!this.userHasInteracted) {
+            this.play();
         }
     }
     

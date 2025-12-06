@@ -104,8 +104,9 @@ class Router {
         const redirectPath = sessionStorage.getItem('redirect_path');
         if (redirectPath) {
             sessionStorage.removeItem('redirect_path');
-            // Nettoyer l'URL (enlever le query string utilisé pour la redirection)
-            const cleanUrl = this.basePath + redirectPath;
+            // Nettoyer l'URL : enlever le slash final pour éviter les problèmes de chemins relatifs
+            const normalizedPath = redirectPath.replace(/\/$/, '') || '/';
+            const cleanUrl = this.basePath + normalizedPath;
             window.history.replaceState(null, '', cleanUrl);
         }
     }
@@ -202,8 +203,8 @@ class Router {
                 throw new Error('Le site doit être servi via un serveur HTTP (pas file://). Utilisez un serveur local comme "python -m http.server" ou "npx serve".');
             }
 
-            // Charger le template (ajouter le base path pour GitHub Pages)
-            const fullPath = this.basePath ? `${this.basePath}/${templatePath}` : templatePath;
+            // Charger le template avec un chemin absolu (évite les problèmes de chemins relatifs avec les URLs en /page/)
+            const fullPath = this.basePath ? `${this.basePath}/${templatePath}` : `/${templatePath}`;
             console.log('loadPage - Chargement de:', fullPath);
             const response = await fetch(fullPath);
             if (!response.ok) {

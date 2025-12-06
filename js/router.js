@@ -161,6 +161,20 @@ class Router {
             page = path.replace(/^\//, '').replace(/\/$/, '').replace(/\.html$/, '');
         }
 
+        // Redirections des anciennes URLs vers les nouvelles
+        const redirects = {
+            'parcours-de-chirurgie': 'parcours-chirurgie',
+            'contact': 'mon-cabinet'
+        };
+        
+        if (redirects[page]) {
+            const newPage = redirects[page];
+            const newUrl = this.basePath ? `${this.basePath}/${newPage}` : `/${newPage}`;
+            console.log('Redirection:', page, '->', newPage);
+            window.history.replaceState(null, '', newUrl);
+            page = newPage;
+        }
+
         console.log('handleRoute - page détectée:', page);
         this.loadPage(page);
     }

@@ -79,7 +79,8 @@ class Router {
 
                 // Sinon, vérifier si c'est un lien interne vers une route enregistrée
                 if (href && href.startsWith('/') && !href.startsWith('//') && !href.startsWith('http')) {
-                    const page = href.replace(/^\//, '').replace(/\.html$/, '') || 'home';
+                    // Enlever le slash initial, le slash final et l'extension .html
+                    const page = href.replace(/^\//, '').replace(/\/$/, '').replace(/\.html$/, '') || 'home';
                     if (this.routes[page] || page === 'home') {
                         e.preventDefault();
                         this.navigate(page);
@@ -155,7 +156,8 @@ class Router {
         } else {
             // Extraire le nom de la page depuis l'URL
             // Ex: /protheses-mammaires -> protheses-mammaires
-            page = path.replace(/^\//, '').replace(/\.html$/, '');
+            // Ex: /avant-apres/ -> avant-apres (enlever aussi le slash final)
+            page = path.replace(/^\//, '').replace(/\/$/, '').replace(/\.html$/, '');
         }
 
         console.log('handleRoute - page détectée:', page);

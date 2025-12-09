@@ -634,6 +634,13 @@ ul {
   margin-bottom: 2rem;
   width: 100%;
 }
+@media (max-width: 1200px) {
+  .footer__content {
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
 @media (max-width: 768px) {
   .footer__content {
     flex-direction: column;
@@ -659,6 +666,7 @@ ul {
 .footer__section--links {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .footer__section--links {
@@ -725,6 +733,25 @@ ul {
   line-height: 1.7;
   font-size: 0.9rem;
 }
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+.schedule-table td {
+  border: 1px solid #E8E4DF;
+  padding: 0.65rem 0.85rem;
+  font-family: "Lato", "Helvetica Neue", sans-serif;
+  color: #3D4449;
+  font-size: 0.95rem;
+}
+.schedule-table tr:nth-child(odd) {
+  background: #F5F3EF;
+}
+.schedule-table td:first-child {
+  font-weight: 600;
+  text-transform: capitalize;
+}
 .footer__clinic-name {
   display: block;
   margin-bottom: 0.25rem;
@@ -759,34 +786,6 @@ ul {
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
-}
-.footer__section--map {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-@media (max-width: 768px) {
-  .footer__section--map {
-    display: none;
-  }
-}
-.footer__map-link {
-  display: block;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-.footer__map-link:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-}
-.footer__map-image {
-  width: 380px;
-  height: auto;
-  object-fit: cover;
-  display: block;
 }
 .footer__centered {
   text-align: center;
@@ -1020,6 +1019,12 @@ ul {
 @media (max-width: 992px) {
   .presentation__content {
     grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .presentation__content .presentation__image--first {
+    order: -1;
+    margin-bottom: 2rem;
   }
 }
 .presentation__text h3 {
@@ -1258,6 +1263,9 @@ ul {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid #E8E4DF;
+}
+.cta-section p {
+  margin-bottom: 1.5rem;
 }
 
 .contact-info {
@@ -1681,6 +1689,30 @@ ul {
 .cabinet-images__item img:hover {
   transform: scale(1.02);
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cabinet-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.cabinet-videos .cabinet-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 10px rgba(0, 0, 0, 0.04);
+  background: #F5F3EF;
+}
+.cabinet-videos .cabinet-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
 }
 
 .map-section {
@@ -2156,6 +2188,21 @@ ul {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+}
+.chirurgies-page__cta--top {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-top: 0;
+  border-top: none;
+}
+.chirurgies-page__cta--top .btn--full-mobile {
+  width: auto;
+}
+@media (max-width: 576px) {
+  .chirurgies-page__cta--top .btn--full-mobile {
+    width: 100%;
+    text-align: center;
   }
 }
 

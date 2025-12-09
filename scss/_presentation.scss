@@ -19,6 +19,13 @@
         @media (max-width: $breakpoint-lg) {
             grid-template-columns: 1fr;
         }
+
+        @media (max-width: $breakpoint-md) {
+            .presentation__image--first {
+                order: -1; // image en premier sur mobile
+                margin-bottom: $spacing-md;
+            }
+        }
     }
     
     &__text {

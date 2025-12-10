@@ -311,7 +311,16 @@ function main() {
         console.log('✓ .htaccess copié');
     }
 
-    console.log('\n✅ Génération terminée! Les fichiers sont dans le dossier dist/');
+    // Copier CNAME (pour GitHub Pages)
+    if (fs.existsSync(path.join(SRC_DIR, 'CNAME'))) {
+        fs.copyFileSync(
+            path.join(SRC_DIR, 'CNAME'),
+            path.join(DIST_DIR, 'CNAME')
+        );
+        console.log('✓ CNAME copié');
+    }
+
+    console.log('\n✅ Génération terminée! Les fichiers sont dans le dossier docs/');
 }
 
 // Exécuter

@@ -410,7 +410,9 @@ class Router {
                     // Sous-menus visage
                     facelift: 'Lifting cervico facial',
                     eyelidSurgery: 'Blépharoplastie',
-                    earSurgery: 'Oreilles décollées'
+                    earSurgery: 'Oreilles décollées',
+                    // Autres
+                    legalNotice: 'Mentions légales'
                 },
                 footer: {
                     copyright: '© 2024 Dr. Aurore Woussen. Tous droits réservés.',
@@ -448,7 +450,9 @@ class Router {
                     // Sous-menus visage
                     facelift: 'Facelift',
                     eyelidSurgery: 'Eyelid surgery',
-                    earSurgery: 'Ear surgery'
+                    earSurgery: 'Ear surgery',
+                    // Autres
+                    legalNotice: 'Legal notice'
                 },
                 footer: {
                     copyright: '© 2024 Dr. Aurore Woussen. All rights reserved.',

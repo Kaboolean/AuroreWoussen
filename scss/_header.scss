@@ -160,6 +160,15 @@
     &__item {
         position: relative;
         
+        &--lang-mobile {
+            display: none;
+            width: 100%;
+            
+            @media (max-width: $breakpoint-md) {
+                display: block;
+            }
+        }
+        
         &--dropdown {
             &::before {
                 content: '';
@@ -390,6 +399,102 @@
     
     @media (max-width: $breakpoint-lg) {
         display: none;
+    }
+}
+
+// ============================================
+// TOGGLE LANGUE FR/EN
+// ============================================
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: $spacing-sm;
+    padding-left: $spacing-sm;
+    border-left: 1px solid rgba($border-color, 0.5);
+    
+    @media (max-width: $breakpoint-md) {
+        // En mobile, afficher dans la nav mobile
+        display: none;
+    }
+    
+    &__btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: $font-family-primary;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: $text-light;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: $transition-fast;
+        
+        &:hover {
+            color: $primary-color;
+            background: rgba($accent-gold, 0.1);
+        }
+        
+        &--active {
+            color: $primary-color;
+            font-weight: 700;
+            
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 2px;
+                background: $accent-gold;
+                margin-top: 2px;
+            }
+        }
+    }
+    
+    &__sep {
+        color: rgba($border-color, 0.8);
+        font-size: 0.8rem;
+        user-select: none;
+    }
+}
+
+// Toggle langue en mobile (dans la nav)
+.lang-toggle-mobile {
+    display: none;
+    
+    @media (max-width: $breakpoint-md) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: $spacing-sm;
+        margin-top: $spacing-sm;
+        border-top: 1px solid rgba($border-color, 0.3);
+    }
+    
+    &__btn {
+        background: none;
+        border: 1px solid rgba($border-color, 0.5);
+        cursor: pointer;
+        font-family: $font-family-primary;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $text-light;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        transition: $transition-fast;
+        
+        &:hover {
+            color: $primary-color;
+            border-color: $accent-gold;
+        }
+        
+        &--active {
+            color: $white;
+            background: $primary-color;
+            border-color: $primary-color;
+            font-weight: 600;
+        }
     }
 }
 

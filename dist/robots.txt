@@ -1,0 +1,12 @@
+# Robots.txt pour docteur-aurore-woussen.fr
+User-agent: *
+Allow: /
+
+# Dossiers à exclure
+Disallow: /scss/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.cursor/
+
+# Sitemap
+Sitemap: https://docteur-aurore-woussen.fr/sitemap.xml

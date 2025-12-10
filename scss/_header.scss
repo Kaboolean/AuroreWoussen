@@ -483,10 +483,20 @@
         padding: 0.5rem 1rem;
         border-radius: 20px;
         transition: $transition-fast;
+        // Empêcher les styles par défaut du navigateur mobile
+        -webkit-tap-highlight-color: transparent;
+        -webkit-appearance: none;
+        user-select: none;
+        outline: none;
         
         &:hover {
             color: $primary-color;
             border-color: $accent-gold;
+        }
+        
+        &:focus,
+        &:active {
+            outline: none;
         }
         
         &--active {
@@ -494,6 +504,13 @@
             background: $primary-color;
             border-color: $primary-color;
             font-weight: 600;
+            
+            &:focus,
+            &:active {
+                color: $white;
+                background: $primary-color;
+                border-color: $primary-color;
+            }
         }
     }
 }

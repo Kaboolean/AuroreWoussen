@@ -9,7 +9,7 @@ const path = require('path');
 // Configuration
 const BASE_URL = 'https://docteur-aurore-woussen.fr';
 const SRC_DIR = path.join(__dirname, '..');
-const DIST_DIR = path.join(__dirname, '..', 'dist');
+const DIST_DIR = path.join(__dirname, '..', 'docs');
 
 // Configuration SEO pour chaque page
 const SEO_CONFIG = {

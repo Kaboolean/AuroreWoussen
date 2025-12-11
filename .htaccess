@@ -1,6 +1,18 @@
 # Configuration pour OVH
-# Redirection vers index.html si le fichier n'existe pas
+# Redirection vers index.html si le fichier n'existe pas (SPA)
 DirectoryIndex index.html
+
+# Réécriture d'URL pour Single Page Application (SPA)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Si le fichier ou dossier existe réellement, le servir
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Sinon, rediriger vers index.html (le router JS gérera le reste)
+    RewriteRule ^(.*)$ /index.html [L,QSA]
+</IfModule>
 
 # Compression GZIP pour améliorer les performances
 <IfModule mod_deflate.c>

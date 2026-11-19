@@ -99,7 +99,7 @@ const SEO_CONFIG = {
     },
     'mon-cabinet': {
         title: 'Mon Cabinet | Dr. Woussen | Clinique Villette Dunkerque',
-        description: 'Découvrez le cabinet du Dr. Aurore Woussen à la Clinique Villette, 18 rue Parmentier, Dunkerque. Tél: 03 28 23 77 24. Prise de RDV sur Doctolib.'
+        description: 'Découvrez le cabinet du Dr. Aurore Woussen à la Clinique Villette, 18 rue Parmentier, Dunkerque. Tél: 03 28 24 44 84. Prise de RDV sur Doctolib.'
     },
     'mentions-legales': {
         title: 'Mentions Légales | Dr. Aurore Woussen',

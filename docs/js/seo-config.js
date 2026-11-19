@@ -95,7 +95,7 @@ const SEO_CONFIG = {
         },
         'mon-cabinet': {
             title: 'Mon Cabinet | Dr. Woussen | Clinique Villette Dunkerque Nord',
-            description: 'Cabinet du Dr. Aurore Woussen à la Clinique Villette, 18 rue Parmentier, Dunkerque, Nord (59). Tél: 03 28 23 77 24. Patients de Calais, Lille, Hauts-de-France.'
+            description: 'Cabinet du Dr. Aurore Woussen à la Clinique Villette, 18 rue Parmentier, Dunkerque, Nord (59). Tél: 03 28 24 44 84. Patients de Calais, Lille, Hauts-de-France.'
         },
         'mentions-legales': {
             title: 'Mentions Légales | Dr. Aurore Woussen',
